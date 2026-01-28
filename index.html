@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    .font-serif-display {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .font-sans-body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary-action) 0%, var(--secondary-action) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+    }
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-action);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .skill-bar {
+      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .fade-in {
+      animation: fadeIn 0.6s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    .slide-up {
+      animation: slideUp 0.6s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+    .stagger-5 { animation-delay: 0.5s; }
+    .stagger-6 { animation-delay: 0.6s; }
+    :root {
+      --background: #0a0a0f;
+      --surface: #14141f;
+      --text: #f0f0f5;
+      --primary-action: #6366f1;
+      --secondary-action: #a855f7;
+    }
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary-action), transparent);
+    }
+    .glow-effect {
+      box-shadow: 0 0 60px -15px var(--primary-action);
+    }
+    .project-tag {
+      backdrop-filter: blur(8px);
+    }
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    .gradient-border {
+      position: relative;
+      background: var(--surface);
+      border-radius: 1rem;
+    }
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 1rem;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--primary-action), var(--secondary-action));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+    .stats-counter {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-sans-body" style="background-color: var(--background); color: var(--text);">
+  <div id="app-wrapper" class="h-full w-full overflow-auto"><!-- Navigation -->
+   <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4" style="background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px);">
+    <div class="max-w-6xl mx-auto flex justify-between items-center"><a href="#hero" class="font-serif-display text-2xl font-bold" style="color: var(--primary-action);" id="nav-logo">AB</a>
+     <div class="hidden md:flex gap-8 text-sm tracking-wide"><a href="#about" class="nav-link opacity-80 hover:opacity-100 transition-opacity">About</a> <a href="#experience" class="nav-link opacity-80 hover:opacity-100 transition-opacity">Experience</a> <a href="#skills" class="nav-link opacity-80 hover:opacity-100 transition-opacity">Skills</a> <a href="#projects" class="nav-link opacity-80 hover:opacity-100 transition-opacity">Projects</a> <a href="#contact" class="nav-link opacity-80 hover:opacity-100 transition-opacity">Contact</a>
+     </div><button id="mobile-menu-btn" class="md:hidden p-2" aria-label="Menu">
+      <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18" />
+      </svg></button>
+    </div><!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 p-6 flex flex-col gap-4" style="background: rgba(10, 10, 15, 0.95);"><a href="#about" class="text-lg">About</a> <a href="#experience" class="text-lg">Experience</a> <a href="#skills" class="text-lg">Skills</a> <a href="#projects" class="text-lg">Projects</a> <a href="#contact" class="text-lg">Contact</a>
+    </div>
+   </nav><!-- Hero Section -->
+   <section id="hero" class="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-30">
+     <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl" style="background: var(--primary-action);"></div>
+     <div class="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl" style="background: var(--secondary-action);"></div>
+    </div>
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+     <p class="text-sm tracking-widest uppercase mb-6 slide-up" style="color: var(--primary-action);">Welcome to my portfolio</p>
+     <h1 id="hero-name" class="font-serif-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 slide-up stagger-1">Assim Ben Ahmed</h1>
+     <h2 id="hero-title" class="text-2xl md:text-3xl font-light mb-4 slide-up stagger-2 gradient-text">AI &amp; Data Science Student</h2>
+     <p id="hero-subtitle" class="text-lg md:text-xl opacity-70 mb-10 slide-up stagger-3 max-w-2xl mx-auto">Applying AI to real-world business and technical problems through innovative solutions. Seeking alternance opportunities in AI, Data, and Automation.</p>
+     <div class="flex flex-wrap justify-center gap-4 slide-up stagger-4"><a href="#projects" class="px-8 py-4 rounded-full font-medium transition-all hover:scale-105 hover:shadow-lg" style="background: var(--primary-action);">View My Work</a> <a href="#contact" class="px-8 py-4 rounded-full font-medium border transition-all hover:scale-105" style="border-color: var(--text); opacity: 0.8;">Get In Touch</a> <a href="Assim Ben Ahmed (2).pdf" download class="px-8 py-4 rounded-full font-medium transition-all hover:scale-105 flex items-center gap-2" style="background: var(--surface);">
+       <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+       </svg> Download CV </a>
+     </div>
+     <div class="mt-16 slide-up stagger-5"><a href="#about" class="inline-flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity"> <span class="text-xs tracking-widest uppercase">Scroll Down</span>
+       <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="animate-bounce"><path d="M12 5v14M5 12l7 7 7-7" />
+       </svg></a>
+     </div>
+    </div>
+   </section><!-- About Section -->
+   <section id="about" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+     <div class="section-divider mb-16"></div>
+     <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+       <p class="text-sm tracking-widest uppercase mb-4" style="color: var(--primary-action);">About Me</p>
+       <h2 class="font-serif-display text-4xl md:text-5xl font-bold mb-6">Passionate about AI &amp; Data Science</h2>
+       <p id="about-text" class="text-lg opacity-70 leading-relaxed mb-6">I'm a Master's student at aivancity (Paris–Nice) specializing in Artificial Intelligence &amp; Data Science. As a fast learner who thrives both independently and in team settings, I'm focused on applying AI to solve real-world business and technical challenges. From data processing to deployment, I enjoy working on end-to-end projects that create tangible impact. Currently seeking an alternance position where I can contribute my skills in AI, machine learning, and automation while continuing to grow professionally.</p>
+       <div class="flex flex-wrap gap-4">
+        <div class="px-4 py-2 rounded-lg" style="background: var(--surface);"><span class="text-2xl font-bold" style="color: var(--primary-action);">6</span>
+         <p class="text-sm opacity-70">Projects Completed</p>
+        </div>
+        <div class="px-4 py-2 rounded-lg" style="background: var(--surface);"><span class="text-2xl font-bold" style="color: var(--primary-action);">2+</span>
+         <p class="text-sm opacity-70">Years Experience</p>
+        </div>
+        <div class="px-4 py-2 rounded-lg" style="background: var(--surface);"><span class="text-2xl font-bold" style="color: var(--primary-action);">4</span>
+         <p class="text-sm opacity-70">Languages Spoken</p>
+        </div>
+       </div>
+      </div>
+      <div class="relative">
+       <div class="aspect-square rounded-2xl glow-effect flex items-center justify-center" style="background: var(--surface);">
+        <div class="text-center p-8">
+         <div class="w-32 h-32 mx-auto mb-6 rounded-full flex items-center justify-center text-6xl" style="background: linear-gradient(135deg, var(--primary-action), var(--secondary-action));">
+          👨‍💻
+         </div>
+         <p class="font-serif-display text-xl italic opacity-80 mb-8">"Code is poetry"</p>
+         <div class="grid grid-cols-2 gap-4 text-sm">
+          <div class="p-3 rounded-lg" style="background: var(--background);">
+           <div class="stats-counter font-bold text-xl mb-1" style="color: var(--primary-action);">
+            1,427+
+           </div>
+           <div class="opacity-70">
+            Questions Created
+           </div>
+          </div>
+          <div class="p-3 rounded-lg" style="background: var(--background);">
+           <div class="stats-counter font-bold text-xl mb-1" style="color: var(--primary-action);">
+            500+
+           </div>
+           <div class="opacity-70">
+            GitHub Commits
+           </div>
+          </div>
+          <div class="p-3 rounded-lg" style="background: var(--background);">
+           <div class="stats-counter font-bold text-xl mb-1" style="color: var(--primary-action);">
+            3
+           </div>
+           <div class="opacity-70">
+            Internships
+           </div>
+          </div>
+          <div class="p-3 rounded-lg" style="background: var(--background);">
+           <div class="stats-counter font-bold text-xl mb-1" style="color: var(--primary-action);">
+            100%
+           </div>
+           <div class="opacity-70">
+            Dedication
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Experience Section -->
+   <section id="experience" class="py-24 px-6" style="background: var(--surface);">
+    <div class="max-w-6xl mx-auto">
+     <p class="text-sm tracking-widest uppercase mb-4 text-center" style="color: var(--primary-action);">Experience</p>
+     <h2 class="font-serif-display text-4xl md:text-5xl font-bold mb-16 text-center">My Journey</h2>
+     <div class="relative">
+      <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px transform md:-translate-x-1/2" style="background: linear-gradient(to bottom, var(--primary-action), var(--secondary-action));"></div><!-- Experience Items -->
+      <div class="space-y-12"><!-- Item 1 -->
+       <div class="relative flex flex-col md:flex-row gap-8 md:gap-16">
+        <div class="md:w-1/2 md:text-right md:pr-16">
+         <div class="absolute left-0 md:left-1/2 w-4 h-4 rounded-full transform -translate-x-1/2 mt-2" style="background: var(--primary-action);"></div><span class="text-sm" style="color: var(--primary-action);">2023 - 2028</span>
+         <h3 class="font-serif-display text-2xl font-bold mt-2">Master's in AI &amp; Data Science</h3>
+         <p class="opacity-70 mt-1">aivancity (Paris–Nice)</p>
+         <p class="opacity-60 mt-3 text-sm">Grande École de l'Intelligence Artificielle et de la Data. Comprehensive program covering machine learning, deep learning, data engineering, and AI system deployment.</p>
+        </div>
+        <div class="md:w-1/2"></div>
+       </div><!-- Item 2 -->
+       <div class="relative flex flex-col md:flex-row gap-8 md:gap-16">
+        <div class="md:w-1/2"></div>
+        <div class="md:w-1/2 md:pl-16">
+         <div class="absolute left-0 md:left-1/2 w-4 h-4 rounded-full transform -translate-x-1/2 mt-2" style="background: var(--secondary-action);"></div><span class="text-sm" style="color: var(--secondary-action);">April 2025 - July 2025</span>
+         <h3 class="font-serif-display text-2xl font-bold mt-2">Data &amp; AI Intern</h3>
+         <p class="opacity-70 mt-1">WELL PACK (Paris)</p>
+         <p class="opacity-60 mt-3 text-sm">Developed end-to-end ML automation for predicting optimal SMS sending times. Built AI agents (Email Assistant, Pipedrive CRM Agent) for workflow automation. Delivered production-ready solutions with UI and demos using Python, Java, Docker, and APIs.</p>
+        </div>
+       </div><!-- Item 3 -->
+       <div class="relative flex flex-col md:flex-row gap-8 md:gap-16">
+        <div class="md:w-1/2 md:text-right md:pr-16">
+         <div class="absolute left-0 md:left-1/2 w-4 h-4 rounded-full transform -translate-x-1/2 mt-2" style="background: var(--primary-action);"></div><span class="text-sm" style="color: var(--primary-action);">May 2024 - July 2024</span>
+         <h3 class="font-serif-display text-2xl font-bold mt-2">Content Creator &amp; Integrator Intern</h3>
+         <p class="opacity-70 mt-1">Naimrod (Paris)</p>
+         <p class="opacity-60 mt-3 text-sm">Created and integrated 1,427 grammar-focused MCQs into an educational platform. Used CMS tools to ensure content quality, consistency, and scalability for high-value educational content.</p>
+        </div>
+        <div class="md:w-1/2"></div>
+       </div><!-- Item 4 -->
+       <div class="relative flex flex-col md:flex-row gap-8 md:gap-16">
+        <div class="md:w-1/2"></div>
+        <div class="md:w-1/2 md:pl-16">
+         <div class="absolute left-0 md:left-1/2 w-4 h-4 rounded-full transform -translate-x-1/2 mt-2" style="background: var(--secondary-action);"></div><span class="text-sm" style="color: var(--secondary-action);">2023 - 2025</span>
+         <h3 class="font-serif-display text-2xl font-bold mt-2">AI Clinic Projects</h3>
+         <p class="opacity-70 mt-1">aivancity</p>
+         <p class="opacity-60 mt-3 text-sm">The AI Clinic is aivancity's professional consulting program where students collaborate with leading companies on real-world AI projects. Through short-term engagements and internships with industry partners, I gained hands-on experience in applied AI, developing solutions for voice recognition optimization and CRM analytics. This program enabled me to acquire essential professional skills including project management, client communication, and translating business requirements into technical implementations.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Certifications Section -->
+   <section class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+     <p class="text-sm tracking-widest uppercase mb-4 text-center" style="color: var(--primary-action);">Achievements</p>
+     <h2 class="font-serif-display text-4xl md:text-5xl font-bold mb-16 text-center">Certifications &amp; Awards</h2>
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="p-6 rounded-2xl text-center scroll-reveal" style="background: var(--surface);">
+       <div class="text-5xl mb-4 float-animation">
+        🏆
+       </div>
+       <h4 class="font-bold mb-2">Microsoft Imagine Cup</h4>
+       <p class="text-sm opacity-70">Selected Participant</p>
+       <p class="text-xs opacity-50 mt-2">2024</p>
+      </div>
+      <div class="p-6 rounded-2xl text-center scroll-reveal" style="background: var(--surface);">
+       <div class="text-5xl mb-4 float-animation" style="animation-delay: 0.8s;">
+        🎖️
+       </div>
+       <h4 class="font-bold mb-2">100% Attendance Certificate</h4>
+       <p class="text-sm opacity-70">AKIS GEMS School Dubai</p>
+       <p class="text-xs opacity-50 mt-2">2022</p>
+      </div>
+      <div class="p-6 rounded-2xl text-center scroll-reveal" style="background: var(--surface);">
+       <div class="text-5xl mb-4 float-animation" style="animation-delay: 0.2s;">
+        �
+       </div>
+       <h4 class="font-bold mb-2">Python for Time Series Forecasting</h4>
+       <p class="text-sm opacity-70">LinkedIn Learning</p>
+       <p class="text-xs opacity-50 mt-2">2024</p>
+      </div>
+      <div class="p-6 rounded-2xl text-center scroll-reveal" style="background: var(--surface);">
+       <div class="text-5xl mb-4 float-animation" style="animation-delay: 0.4s;">
+        🔒
+       </div>
+       <h4 class="font-bold mb-2">Cybersecurity Foundations</h4>
+       <p class="text-sm opacity-70">LinkedIn Learning</p>
+       <p class="text-xs opacity-50 mt-2">2024</p>
+      </div>
+      <div class="p-6 rounded-2xl text-center scroll-reveal" style="background: var(--surface);">
+       <div class="text-5xl mb-4 float-animation" style="animation-delay: 0.6s;">
+        👔
+       </div>
+       <h4 class="font-bold mb-2">HR Foundations: Core Human Resources</h4>
+       <p class="text-sm opacity-70">LinkedIn Learning</p>
+       <p class="text-xs opacity-50 mt-2">2024</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Skills Section -->
+   <section id="skills" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+     <p class="text-sm tracking-widest uppercase mb-4 text-center" style="color: var(--primary-action);">Skills</p>
+     <h2 class="font-serif-display text-4xl md:text-5xl font-bold mb-16 text-center">What I Work With</h2><!-- Interactive Skill Categories -->
+     <div class="flex flex-wrap justify-center gap-4 mb-12"><button class="skill-category-btn px-6 py-3 rounded-full transition-all active" data-category="technical" style="background: var(--primary-action);"> 💻 Technical </button> <button class="skill-category-btn px-6 py-3 rounded-full transition-all" data-category="tools" style="background: var(--surface);"> 🛠️ Tools </button> <button class="skill-category-btn px-6 py-3 rounded-full transition-all" data-category="frameworks" style="background: var(--surface);"> 📦 Frameworks </button> <button class="skill-category-btn px-6 py-3 rounded-full transition-all" data-category="soft" style="background: var(--surface);"> 🎯 Soft Skills </button>
+     </div>
+     <div id="skills-content" class="min-h-[400px]"><!-- Technical Skills -->
+      <div class="skill-category-content" data-category="technical">
+       <div class="grid md:grid-cols-2 gap-8">
+        <div class="p-8 rounded-2xl scroll-reveal" style="background: var(--surface);">
+         <h3 class="font-serif-display text-2xl font-bold mb-8 flex items-center gap-3"><span class="text-3xl">🐍</span> Programming Languages</h3>
+         <div class="space-y-6">
+          <div>
+           <div class="flex justify-between mb-2"><span>Python</span> <span style="color: var(--primary-action);">95%</span>
+           </div>
+           <div class="h-2 rounded-full overflow-hidden" style="background: var(--background);">
+            <div class="skill-bar h-full rounded-full" style="width: 95%; background: linear-gradient(90deg, var(--primary-action), var(--secondary-action));"></div>
+           </div>
+          </div>
+          <div>
+           <div class="flex justify-between mb-2"><span>Java</span> <span style="color: var(--primary-action);">75%</span>
+           </div>
+           <div class="h-2 rounded-full overflow-hidden" style="background: var(--background);">
+            <div class="skill-bar h-full rounded-full" style="width: 75%; background: linear-gradient(90deg, var(--primary-action), var(--secondary-action));"></div>
+           </div>
+          </div>
+          <div>
+           <div class="flex justify-between mb-2"><span>SQL</span> <span style="color: var(--primary-action);">80%</span>
+           </div>
+           <div class="h-2 rounded-full overflow-hidden" style="background: var(--background);">
+            <div class="skill-bar h-full rounded-full" style="width: 80%; background: linear-gradient(90deg, var(--primary-action), var(--secondary-action));"></div>
+           </div>
+          </div>
+          <div>
+           <div class="flex justify-between mb-2"><span>HTML/CSS</span> <span style="color: var(--primary-action);">70%</span>
+           </div>
+           <div class="h-2 rounded-full overflow-hidden" style="background: var(--background);">
+            <div class="skill-bar h-full rounded-full" style="width: 70%; background: linear-gradient(90deg, var(--primary-action), var(--secondary-action));"></div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="p-8 rounded-2xl scroll-reveal" style="background: var(--surface);">
+         <h3 class="font-serif-display text-2xl font-bold mb-8 flex items-center gap-3"><span class="text-3xl">🤖</span> AI &amp; ML Skills</h3>
+         <div class="space-y-6">
+          <div>
+           <div class="flex justify-between mb-2"><span>Machine Learning</span> <span style="color: var(--primary-action);">90%</span>
+           </div>
+           <div class="h-2 rounded-full overflow-hidden" style="background: var(--background);">
+            <div class="skill-bar h-full rounded-full" style="width: 90%; background: linear-gradient(90deg, var(--primary-action), var(--secondary-action));"></div>
+           </div>
+          </div>
+          <div>
+           <div class="flex justify-between mb-2"><span>Deep Learning</span> <span style="color: var(--primary-action);">85%</span>
+           </div>
+           <div class="h-2 rounded-full overflow-hidden" style="background: var(--background);">
+            <div class="skill-bar h-full rounded-full" style="width: 85%; background: linear-gradient(90deg, var(--primary-action), var(--secondary-action));"></div>
+           </div>
+          </div>
+          <div>
+           <div class="flex justify-between mb-2"><span>NLP &amp; LLMs</span> <span style="color: var(--primary-action);">85%</span>
+           </div>
+           <div class="h-2 rounded-full overflow-hidden" style="background: var(--background);">
+            <div class="skill-bar h-full rounded-full" style="width: 85%; background: linear-gradient(90deg, var(--primary-action), var(--secondary-action));"></div>
+           </div>
+          </div>
+          <div>
+           <div class="flex justify-between mb-2"><span>Computer Vision</span> <span style="color: var(--primary-action);">80%</span>
+           </div>
+           <div class="h-2 rounded-full overflow-hidden" style="background: var(--background);">
+            <div class="skill-bar h-full rounded-full" style="width: 80%; background: linear-gradient(90deg, var(--primary-action), var(--secondary-action));"></div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Tools -->
+      <div class="skill-category-content hidden" data-category="tools">
+       <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl text-center scroll-reveal hover:scale-105 transition-all cursor-pointer" style="background: var(--surface);">
+         <div class="text-5xl mb-4">
+          🐙
+         </div>
+         <h4 class="font-bold mb-2">Git &amp; GitHub</h4>
+         <p class="text-sm opacity-70">Version control &amp; collaboration</p>
+        </div>
+        <div class="p-6 rounded-2xl text-center scroll-reveal hover:scale-105 transition-all cursor-pointer" style="background: var(--surface);">
+         <div class="text-5xl mb-4">
+          🐳
+         </div>
+         <h4 class="font-bold mb-2">Docker</h4>
+         <p class="text-sm opacity-70">Containerization &amp; deployment</p>
+        </div>
+        <div class="p-6 rounded-2xl text-center scroll-reveal hover:scale-105 transition-all cursor-pointer" style="background: var(--surface);">
+         <div class="text-5xl mb-4">
+          📊
+         </div>
+         <h4 class="font-bold mb-2">Jupyter</h4>
+         <p class="text-sm opacity-70">Interactive data analysis</p>
+        </div>
+        <div class="p-6 rounded-2xl text-center scroll-reveal hover:scale-105 transition-all cursor-pointer" style="background: var(--surface);">
+         <div class="text-5xl mb-4">
+          🔗
+         </div>
+         <h4 class="font-bold mb-2">APIs &amp; REST</h4>
+         <p class="text-sm opacity-70">Integration &amp; automation</p>
+        </div>
+        <div class="p-6 rounded-2xl text-center scroll-reveal hover:scale-105 transition-all cursor-pointer" style="background: var(--surface);">
+         <div class="text-5xl mb-4">
+          💼
+         </div>
+         <h4 class="font-bold mb-2">Pipedrive CRM</h4>
+         <p class="text-sm opacity-70">Customer relationship management</p>
+        </div>
+        <div class="p-6 rounded-2xl text-center scroll-reveal hover:scale-105 transition-all cursor-pointer" style="background: var(--surface);">
+         <div class="text-5xl mb-4">
+          📝
+         </div>
+         <h4 class="font-bold mb-2">CMS Platforms</h4>
+         <p class="text-sm opacity-70">Content management systems</p>
+        </div>
+       </div>
+      </div><!-- Frameworks -->
+      <div class="skill-category-content hidden" data-category="frameworks">
+       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-6 rounded-2xl scroll-reveal hover:scale-105 transition-all" style="background: var(--surface);">
+         <div class="text-4xl mb-3 text-center">
+          🔢
+         </div>
+         <h4 class="font-bold text-center mb-2">NumPy</h4>
+         <p class="text-sm opacity-70 text-center">Numerical computing</p>
+        </div>
+        <div class="p-6 rounded-2xl scroll-reveal hover:scale-105 transition-all" style="background: var(--surface);">
+         <div class="text-4xl mb-3 text-center">
+          🐼
+         </div>
+         <h4 class="font-bold text-center mb-2">Pandas</h4>
+         <p class="text-sm opacity-70 text-center">Data manipulation</p>
+        </div>
+        <div class="p-6 rounded-2xl scroll-reveal hover:scale-105 transition-all" style="background: var(--surface);">
+         <div class="text-4xl mb-3 text-center">
+          📈
+         </div>
+         <h4 class="font-bold text-center mb-2">scikit-learn</h4>
+         <p class="text-sm opacity-70 text-center">Machine learning</p>
+        </div>
+        <div class="p-6 rounded-2xl scroll-reveal hover:scale-105 transition-all" style="background: var(--surface);">
+         <div class="text-4xl mb-3 text-center">
+          🧠
+         </div>
+         <h4 class="font-bold text-center mb-2">TensorFlow</h4>
+         <p class="text-sm opacity-70 text-center">Deep learning</p>
+        </div>
+        <div class="p-6 rounded-2xl scroll-reveal hover:scale-105 transition-all" style="background: var(--surface);">
+         <div class="text-4xl mb-3 text-center">
+          🔥
+         </div>
+         <h4 class="font-bold text-center mb-2">PyTorch</h4>
+         <p class="text-sm opacity-70 text-center">Neural networks</p>
+        </div>
+        <div class="p-6 rounded-2xl scroll-reveal hover:scale-105 transition-all" style="background: var(--surface);">
+         <div class="text-4xl mb-3 text-center">
+          👁️
+         </div>
+         <h4 class="font-bold text-center mb-2">OpenCV</h4>
+         <p class="text-sm opacity-70 text-center">Computer vision</p>
+        </div>
+        <div class="p-6 rounded-2xl scroll-reveal hover:scale-105 transition-all" style="background: var(--surface);">
+         <div class="text-4xl mb-3 text-center">
+          🤗
+         </div>
+         <h4 class="font-bold text-center mb-2">Hugging Face</h4>
+         <p class="text-sm opacity-70 text-center">NLP models</p>
+        </div>
+        <div class="p-6 rounded-2xl scroll-reveal hover:scale-105 transition-all" style="background: var(--surface);">
+         <div class="text-4xl mb-3 text-center">
+          ⚡
+         </div>
+         <h4 class="font-bold text-center mb-2">FastAPI</h4>
+         <p class="text-sm opacity-70 text-center">API development</p>
+        </div>
+       </div>
+      </div><!-- Soft Skills -->
+      <div class="skill-category-content hidden" data-category="soft">
+       <div class="grid md:grid-cols-2 gap-8">
+        <div class="p-8 rounded-2xl scroll-reveal" style="background: var(--surface);">
+         <h3 class="font-serif-display text-2xl font-bold mb-6">Professional Skills</h3>
+         <div class="space-y-4">
+          <div class="flex items-start gap-4">
+           <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, var(--primary-action), var(--secondary-action));"><span>🎯</span>
+           </div>
+           <div>
+            <h4 class="font-bold mb-1">Problem Solving</h4>
+            <p class="text-sm opacity-70">Breaking down complex challenges into actionable solutions</p>
+           </div>
+          </div>
+          <div class="flex items-start gap-4">
+           <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, var(--primary-action), var(--secondary-action));"><span>👥</span>
+           </div>
+           <div>
+            <h4 class="font-bold mb-1">Team Collaboration</h4>
+            <p class="text-sm opacity-70">Working effectively in diverse, multidisciplinary teams</p>
+           </div>
+          </div>
+          <div class="flex items-start gap-4">
+           <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, var(--primary-action), var(--secondary-action));"><span>💡</span>
+           </div>
+           <div>
+            <h4 class="font-bold mb-1">Fast Learner</h4>
+            <p class="text-sm opacity-70">Quick adaptation to new technologies and methodologies</p>
+           </div>
+          </div>
+          <div class="flex items-start gap-4">
+           <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, var(--primary-action), var(--secondary-action));"><span>📢</span>
+           </div>
+           <div>
+            <h4 class="font-bold mb-1">Communication</h4>
+            <p class="text-sm opacity-70">Explaining technical concepts to non-technical stakeholders</p>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="space-y-6">
+         <div class="p-8 rounded-2xl scroll-reveal" style="background: var(--surface);">
+          <h3 class="font-serif-display text-2xl font-bold mb-6">Languages</h3>
+          <div class="grid grid-cols-2 gap-4">
+           <div class="flex items-center gap-3"><span style="color: var(--primary-action);">🌟</span> <span>Arabic (C2)</span>
+           </div>
+           <div class="flex items-center gap-3"><span style="color: var(--primary-action);">🌟</span> <span>English (C2)</span>
+           </div>
+           <div class="flex items-center gap-3"><span style="color: var(--primary-action);">✓</span> <span>French (C1)</span>
+           </div>
+           <div class="flex items-center gap-3"><span style="color: var(--primary-action);">✓</span> <span>German (B1)</span>
+           </div>
+          </div>
+         </div>
+         <div class="p-8 rounded-2xl scroll-reveal" style="background: var(--surface);">
+          <h3 class="font-serif-display text-2xl font-bold mb-6">Work Style</h3>
+          <div class="flex flex-wrap gap-3"><span class="px-4 py-2 rounded-full text-sm" style="background: var(--background); border: 1px solid var(--primary-action);">Independent</span> <span class="px-4 py-2 rounded-full text-sm" style="background: var(--background); border: 1px solid var(--primary-action);">Team Player</span> <span class="px-4 py-2 rounded-full text-sm" style="background: var(--background); border: 1px solid var(--primary-action);">Agile</span> <span class="px-4 py-2 rounded-full text-sm" style="background: var(--background); border: 1px solid var(--primary-action);">Detail-Oriented</span> <span class="px-4 py-2 rounded-full text-sm" style="background: var(--background); border: 1px solid var(--primary-action);">Creative</span> <span class="px-4 py-2 rounded-full text-sm" style="background: var(--background); border: 1px solid var(--primary-action);">Adaptable</span>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Projects Section -->
+   <section id="projects" class="py-24 px-6" style="background: var(--surface);">
+    <div class="max-w-6xl mx-auto">
+     <p class="text-sm tracking-widest uppercase mb-4 text-center" style="color: var(--primary-action);">Projects</p>
+     <h2 class="font-serif-display text-4xl md:text-5xl font-bold mb-6 text-center">Featured Work</h2>
+     <p class="text-center opacity-70 mb-16 max-w-2xl mx-auto">A selection of projects that showcase my skills and passion for development. Each project represents a unique challenge and learning opportunity.</p><!-- Project Filter -->
+     <div class="flex flex-wrap justify-center gap-4 mb-12"><button class="project-filter px-6 py-2 rounded-full text-sm transition-all active" data-filter="all" style="background: var(--primary-action);">All Projects</button> <button class="project-filter px-6 py-2 rounded-full text-sm transition-all" data-filter="ai-clinic" style="background: var(--background);">🎓 AI Clinic</button> <button class="project-filter px-6 py-2 rounded-full text-sm transition-all" data-filter="internship" style="background: var(--background);">💼 Internships</button> <button class="project-filter px-6 py-2 rounded-full text-sm transition-all" data-filter="personal" style="background: var(--background);">🚀 Personal</button>
+     </div><!-- Projects Grid -->
+     <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Project 1 -->
+      <div class="project-card card-hover rounded-2xl overflow-hidden scroll-reveal cursor-pointer" data-category="personal" style="background: var(--background);" onclick="window.open('project-vitalight.html', '_blank')">
+       <div class="aspect-video flex items-center justify-center text-6xl" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));">
+        💡
+       </div>
+       <div class="p-6">
+        <div class="flex flex-wrap gap-2 mb-4"><span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-action);">Python</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-action);">Machine Learning</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-action);">Healthcare AI</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-action);">TensorFlow</span>
+        </div>
+        <h3 class="font-serif-display text-xl font-bold mb-2">VitalLight – Microsoft Imagine Cup</h3>
+        <p class="text-sm opacity-70 mb-4">AI-powered healthcare application for predictive newborn disease detection using parents' medical history. Selected for Microsoft Imagine Cup competition.</p>
+        <div class="flex gap-4"><span class="text-sm flex items-center gap-2" style="color: var(--primary-action);">
+          <svg width="16" height="16" viewbox="0 0 24 24" fill="currentColor">
+           <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" />
+          </svg> Imagine Cup </span>
+        </div>
+       </div>
+      </div><!-- Project 2 -->
+      <div class="project-card card-hover rounded-2xl overflow-hidden scroll-reveal cursor-pointer" data-category="ai-clinic" style="background: var(--background);" onclick="window.open('project-medical-chatbot.html', '_blank')">
+       <div class="aspect-video flex items-center justify-center text-6xl" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2));">
+        💓
+       </div>
+       <div class="p-6">
+        <div class="flex flex-wrap gap-2 mb-4"><span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(168, 85, 247, 0.2); color: var(--secondary-action);">Machine Learning</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(168, 85, 247, 0.2); color: var(--secondary-action);">Python</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(168, 85, 247, 0.2); color: var(--secondary-action);">VAE</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(168, 85, 247, 0.2); color: var(--secondary-action);">Healthcare</span>
+        </div>
+        <h3 class="font-serif-display text-xl font-bold mb-2">AI Clinic – Biometric Health Monitoring</h3>
+        <p class="text-sm opacity-70 mb-4">Advanced algorithmic health monitoring system using synthetic benchmarking and ML to create comprehensive Sleep, Heart, Activity, and Stress scores.</p>
+        <div class="flex gap-4"><span class="text-sm flex items-center gap-2" style="color: var(--primary-action);">
+          <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+           <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+          </svg> Health Analytics </span>
+        </div>
+       </div>
+      </div><!-- Project 3 -->
+      <div class="project-card card-hover rounded-2xl overflow-hidden scroll-reveal cursor-pointer" data-category="internship" style="background: var(--background);" onclick="window.open('project-sms-optimization.html', '_blank')">
+       <div class="aspect-video flex items-center justify-center text-6xl" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(99, 102, 241, 0.2));">
+        📊
+       </div>
+       <div class="p-6">
+        <div class="flex flex-wrap gap-2 mb-4"><span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-action);">Python</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-action);">scikit-learn</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-action);">Time-Series</span>
+        </div>
+        <h3 class="font-serif-display text-xl font-bold mb-2">WELLPACK SMS Optimization</h3>
+        <p class="text-sm opacity-70 mb-4">ML model recommending optimal SMS sending times to increase engagement. Improved campaign efficiency with actionable insights.</p>
+        <div class="flex gap-4"><span class="text-sm flex items-center gap-2" style="color: var(--primary-action);">
+          <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+           <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+          </svg> Marketing </span>
+        </div>
+       </div>
+      </div><!-- Project 4 -->
+      <div class="project-card card-hover rounded-2xl overflow-hidden scroll-reveal cursor-pointer" data-category="ai-clinic" style="background: var(--background);" onclick="window.open('project-crm-analysis.html', '_blank')">
+       <div class="aspect-video flex items-center justify-center text-6xl" style="background: linear-gradient(135deg, rgba(251, 146, 60, 0.2), rgba(251, 191, 36, 0.2));">
+        🔍
+       </div>
+       <div class="p-6">
+        <div class="flex flex-wrap gap-2 mb-4"><span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(251, 146, 60, 0.2); color: #fb923c;">Python</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(251, 146, 60, 0.2); color: #fb923c;">Web Scraping</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(251, 146, 60, 0.2); color: #fb923c;">Pandas</span>
+        </div>
+        <h3 class="font-serif-display text-xl font-bold mb-2">AI Clinic – CRM Analysis for Shift</h3>
+        <p class="text-sm opacity-70 mb-4">Data scraping and analysis project to find the best CRM solution for Shift Technology with data-backed recommendations.</p>
+        <div class="flex gap-4"><span class="text-sm flex items-center gap-2" style="color: var(--primary-action);">
+          <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+           <path d="M3 3h18v18H3V3zm16 16V5H5v14h14z" /><path d="M7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z" />
+          </svg> Analysis </span>
+        </div>
+       </div>
+      </div><!-- Project 4b -->
+      <div class="project-card card-hover rounded-2xl overflow-hidden scroll-reveal cursor-pointer" data-category="ai-clinic" style="background: var(--background);" onclick="window.open('project-pitchboy.html', '_blank')">
+       <div class="aspect-video flex items-center justify-center text-6xl" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));">
+        🎤
+       </div>
+       <div class="p-6">
+        <div class="flex flex-wrap gap-2 mb-4"><span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6;">Python</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6;">RoBERTa</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6;">Audio Analysis</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6;">NLP</span>
+        </div>
+        <h3 class="font-serif-display text-xl font-bold mb-2">AI Clinic – Voice Analysis for Pitchboy</h3>
+        <p class="text-sm opacity-70 mb-4">AI system for voice-based sentiment and emotion analysis from interview data, analyzing prosody, tone, and emotional states.</p>
+        <div class="flex gap-4"><span class="text-sm flex items-center gap-2" style="color: var(--primary-action);">
+          <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+           <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+          </svg> Sentiment AI </span>
+        </div>
+       </div>
+      </div><!-- Project 4c -->
+      <div class="project-card card-hover rounded-2xl overflow-hidden scroll-reveal cursor-pointer" data-category="ai-clinic" style="background: var(--background);" onclick="window.open('project-beparentalis.html', '_blank')">
+       <div class="aspect-video flex items-center justify-center text-6xl" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(249, 115, 22, 0.2));">
+        👶
+       </div>
+       <div class="p-6">
+        <div class="flex flex-wrap gap-2 mb-4"><span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(236, 72, 153, 0.2); color: #ec4899;">Medical LLM</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(236, 72, 153, 0.2); color: #ec4899;">Fine-tuning</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(236, 72, 153, 0.2); color: #ec4899;">French NLP</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(236, 72, 153, 0.2); color: #ec4899;">Healthcare</span>
+        </div>
+        <h3 class="font-serif-display text-xl font-bold mb-2">AI Clinic – Pediatric Chatbot for Beparentalis</h3>
+        <p class="text-sm opacity-70 mb-4">Optimized French pediatric chatbot through LLM benchmarking and fine-tuning to support first-time parents with safe medical advice.</p>
+        <div class="flex gap-4"><span class="text-sm flex items-center gap-2" style="color: var(--primary-action);">
+          <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+           <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+          </svg> Medical AI </span>
+        </div>
+       </div>
+      </div><!-- Project 5 -->
+      <div class="project-card card-hover rounded-2xl overflow-hidden scroll-reveal cursor-pointer" data-category="internship" style="background: var(--background);" onclick="window.open('project-email-assistant.html', '_blank')">
+       <div class="aspect-video flex items-center justify-center text-6xl" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));">
+        📧
+       </div>
+       <div class="p-6">
+        <div class="flex flex-wrap gap-2 mb-4"><span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-action);">Mistral LLM</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-action);">Gmail API</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-action);">Python</span>
+        </div>
+        <h3 class="font-serif-display text-xl font-bold mb-2">Chatbot-Gmail – AI Email Assistant</h3>
+        <p class="text-sm opacity-70 mb-4">AI-powered Gmail assistant for drafting, summarizing, and analyzing emails with smart contact management using Mistral LLM.</p>
+        <div class="flex gap-4"><span class="text-sm flex items-center gap-2" style="color: var(--primary-action);">
+          <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+          </svg> Productivity </span>
+        </div>
+       </div>
+      </div><!-- Project 6a -->
+      <div class="project-card card-hover rounded-2xl overflow-hidden scroll-reveal cursor-pointer" data-category="internship" style="background: var(--background);" onclick="window.open('project-pipedrive.html', '_blank')">
+       <div class="aspect-video flex items-center justify-center text-6xl" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(59, 130, 246, 0.2));">
+        💼
+       </div>
+       <div class="p-6">
+        <div class="flex flex-wrap gap-2 mb-4"><span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(34, 197, 94, 0.2); color: #22c55e;">AI Agent</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(34, 197, 94, 0.2); color: #22c55e;">Pipedrive API</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(34, 197, 94, 0.2); color: #22c55e;">Python</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(34, 197, 94, 0.2); color: #22c55e;">NLP</span>
+        </div>
+        <h3 class="font-serif-display text-xl font-bold mb-2">Pipedrive AI Agent – CRM Automation</h3>
+        <p class="text-sm opacity-70 mb-4">Intelligent AI chatbot agent for Pipedrive CRM automation, enabling natural language interactions for quick and easy CRM operations.</p>
+        <div class="flex gap-4"><span class="text-sm flex items-center gap-2" style="color: var(--primary-action);">
+          <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg> CRM Automation </span>
+        </div>
+       </div>
+      </div><!-- Project 7 -->
+      <div class="project-card card-hover rounded-2xl overflow-hidden scroll-reveal cursor-pointer" data-category="personal" style="background: var(--background);" onclick="window.open('project-aquanova.html', '_blank')">
+       <div class="aspect-video flex items-center justify-center text-6xl" style="background: linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(99, 102, 241, 0.2));">
+        🏊
+       </div>
+       <div class="p-6">
+        <div class="flex flex-wrap gap-2 mb-4"><span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(20, 184, 166, 0.2); color: #14b8a6;">Python</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(20, 184, 166, 0.2); color: #14b8a6;">OpenCV</span> <span class="project-tag px-3 py-1 rounded-full text-xs" style="background: rgba(20, 184, 166, 0.2); color: #14b8a6;">Mediapipe</span>
+        </div>
+        <h3 class="font-serif-display text-xl font-bold mb-2">AquaNova – AI Swim Analysis</h3>
+        <p class="text-sm opacity-70 mb-4">Computer vision platform analyzing swimming technique from videos with annotated feedback and progress tracking.</p>
+        <div class="flex gap-4"><span class="text-sm flex items-center gap-2" style="color: var(--primary-action);">
+          <svg width="16" height="16" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+           <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" /><circle cx="12" cy="13" r="4" />
+          </svg> Sports Tech </span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Testimonials Section -->
+   <section class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+     <p class="text-sm tracking-widest uppercase mb-4 text-center" style="color: var(--primary-action);">What People Say</p>
+     <h2 class="font-serif-display text-4xl md:text-5xl font-bold mb-16 text-center">Kind Words</h2>
+     <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div class="gradient-border p-8 rounded-2xl scroll-reveal">
+       <div class="flex items-center gap-4 mb-4">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl" style="background: linear-gradient(135deg, var(--primary-action), var(--secondary-action));">
+         👨‍💻
+        </div>
+        <div>
+         <h4 class="font-bold">Meddy</h4>
+         <p class="text-sm opacity-70">Data Scientist, WELLPACK</p>
+        </div>
+       </div>
+       <p class="opacity-80 italic">"Working with Assim was a pleasure. His ML models were production-ready and his code quality was exceptional. Highly recommend!"</p>
+       <div class="mt-4 flex gap-1" style="color: var(--primary-action);">
+        ⭐⭐⭐⭐⭐
+       </div>
+      </div>
+      <div class="gradient-border p-8 rounded-2xl scroll-reveal">
+       <div class="flex items-center gap-4 mb-4">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl" style="background: linear-gradient(135deg, var(--primary-action), var(--secondary-action));">
+         👨‍🏫
+        </div>
+        <div>
+         <h4 class="font-bold">Mr. Burak</h4>
+         <p class="text-sm opacity-70">Program Manager & AI Professor, aivancity</p>
+        </div>
+       </div>
+       <p class="opacity-80 italic">"Assim demonstrates exceptional aptitude in artificial intelligence and programming. As both a program manager and professor, I've observed his remarkable ability to bridge theoretical concepts with practical applications. His dedication and innovative approach make him a valuable asset to any AI-focused team."</p>
+       <div class="mt-4 flex gap-1" style="color: var(--primary-action);">
+        ⭐⭐⭐⭐⭐
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section id="contact" class="py-24 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+     <p class="text-sm tracking-widest uppercase mb-4" style="color: var(--primary-action);">Contact</p>
+     <h2 class="font-serif-display text-4xl md:text-5xl font-bold mb-6">Let's Work Together</h2>
+     <p class="text-lg opacity-70 mb-12 max-w-2xl mx-auto">I'm actively seeking alternance opportunities and would love to discuss how I can contribute to your team. Feel free to reach out!</p>
+     <div class="grid md:grid-cols-3 gap-8 mb-12"><a href="#" onclick="event.preventDefault(); navigator.clipboard.writeText('assimben2004@hotmail.com').then(() => { const btn = event.currentTarget; const originalText = btn.querySelector('p').textContent; btn.querySelector('p').textContent = '✓ Copied!'; setTimeout(() => { btn.querySelector('p').textContent = originalText; }, 2000); });" class="p-6 rounded-2xl transition-all hover:scale-105" style="background: var(--surface);">
+       <div class="w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--primary-action), var(--secondary-action));">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+        </svg>
+       </div><h3 class="font-bold mb-2">Email</h3><p id="contact-email" class="text-sm opacity-70">assimben2004@hotmail.com</p></a> <a href="tel:+33745532739" class="p-6 rounded-2xl transition-all hover:scale-105" style="background: var(--surface);">
+       <div class="w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--primary-action), var(--secondary-action));">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+         <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+        </svg>
+       </div><h3 class="font-bold mb-2">Phone</h3><p id="contact-phone" class="text-sm opacity-70">+33 7 45 53 27 39</p></a>
+      <div class="p-6 rounded-2xl" style="background: var(--surface);">
+       <div class="w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--primary-action), var(--secondary-action));">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" />
+        </svg>
+       </div>
+       <h3 class="font-bold mb-2">Location</h3>
+       <p id="contact-location" class="text-sm opacity-70">Paris, France</p>
+      </div>
+     </div>
+     <div class="flex justify-center gap-6"><a href="https://www.linkedin.com/in/assim-ben-ahmed-6268741a8/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-110" style="background: var(--surface);" aria-label="LinkedIn">
+       <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+       </svg></a> <a href="https://github.com/assim-ben-ahmed" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-110" style="background: var(--surface);" aria-label="GitHub">
+       <svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+       </svg></a> <a href="mailto:assimben2004@hotmail.com" class="w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-110" style="background: var(--surface);" aria-label="Email">
+       <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+       </svg></a>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-8 px-6 text-center" style="background: var(--surface);">
+    <p class="text-sm opacity-50">© 2026 <span id="footer-name">Assim Ben Ahmed</span>. Built with passion for AI &amp; Data.</p>
+   </footer><!-- Back to Top Button --> <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 rounded-full flex items-center justify-center transition-all opacity-0 pointer-events-none shadow-lg hover:scale-110" style="background: var(--primary-action);" aria-label="Back to top">
+    <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7" />
+    </svg></button>
+  </div>
+  <script>
+    const defaultConfig = {
+      hero_name: 'Assim Ben Ahmed',
+      hero_title: 'AI & Data Science Student',
+      hero_subtitle: 'Applying AI to real-world business and technical problems through innovative solutions. Seeking alternance opportunities in AI, Data, and Automation.',
+      about_text: "I'm a Master's student at aivancity (Paris–Nice) specializing in Artificial Intelligence & Data Science. As a fast learner who thrives both independently and in team settings, I'm focused on applying AI to solve real-world business and technical challenges. From data processing to deployment, I enjoy working on end-to-end projects that create tangible impact. Currently seeking an alternance position where I can contribute my skills in AI, machine learning, and automation while continuing to grow professionally.",
+      contact_email: 'assimben2004@hotmail.com',
+      contact_phone: '+33 7 45 53 27 39',
+      contact_location: 'Paris, France',
+      background_color: '#0a0a0f',
+      surface_color: '#14141f',
+      text_color: '#f0f0f5',
+      primary_action_color: '#6366f1',
+      secondary_action_color: '#a855f7',
+      font_family: 'DM Sans',
+      font_size: 16
+    };
+
+    let config = { ...defaultConfig };
+
+    function applyColors() {
+      document.documentElement.style.setProperty('--background', config.background_color);
+      document.documentElement.style.setProperty('--surface', config.surface_color);
+      document.documentElement.style.setProperty('--text', config.text_color);
+      document.documentElement.style.setProperty('--primary-action', config.primary_action_color);
+      document.documentElement.style.setProperty('--secondary-action', config.secondary_action_color);
+    }
+
+    function applyFonts() {
+      const fontFamily = config.font_family || defaultConfig.font_family;
+      const baseFontStack = 'system-ui, sans-serif';
+      document.body.style.fontFamily = `${fontFamily}, ${baseFontStack}`;
+      
+      const baseSize = config.font_size || defaultConfig.font_size;
+      document.body.style.fontSize = `${baseSize}px`;
+    }
+
+    async function onConfigChange(newConfig) {
+      config = { ...defaultConfig, ...newConfig };
+      
+      applyColors();
+      applyFonts();
+      
+      document.getElementById('hero-name').textContent = config.hero_name || defaultConfig.hero_name;
+      document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+      document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+      document.getElementById('about-text').textContent = config.about_text || defaultConfig.about_text;
+      document.getElementById('contact-email').textContent = config.contact_email || defaultConfig.contact_email;
+      document.getElementById('contact-phone').textContent = config.contact_phone || defaultConfig.contact_phone;
+      document.getElementById('contact-location').textContent = config.contact_location || defaultConfig.contact_location;
+      document.getElementById('footer-name').textContent = config.hero_name || defaultConfig.hero_name;
+      
+      const initials = (config.hero_name || defaultConfig.hero_name).split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+      document.getElementById('nav-logo').textContent = initials;
+    }
+
+    function mapToCapabilities(cfg) {
+      return {
+        recolorables: [
+          {
+            get: () => cfg.background_color || defaultConfig.background_color,
+            set: (value) => { cfg.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
+          },
+          {
+            get: () => cfg.surface_color || defaultConfig.surface_color,
+            set: (value) => { cfg.surface_color = value; window.elementSdk.setConfig({ surface_color: value }); }
+          },
+          {
+            get: () => cfg.text_color || defaultConfig.text_color,
+            set: (value) => { cfg.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+          },
+          {
+            get: () => cfg.primary_action_color || defaultConfig.primary_action_color,
+            set: (value) => { cfg.primary_action_color = value; window.elementSdk.setConfig({ primary_action_color: value }); }
+          },
+          {
+            get: () => cfg.secondary_action_color || defaultConfig.secondary_action_color,
+            set: (value) => { cfg.secondary_action_color = value; window.elementSdk.setConfig({ secondary_action_color: value }); }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => cfg.font_family || defaultConfig.font_family,
+          set: (value) => { cfg.font_family = value; window.elementSdk.setConfig({ font_family: value }); }
+        },
+        fontSizeable: {
+          get: () => cfg.font_size || defaultConfig.font_size,
+          set: (value) => { cfg.font_size = value; window.elementSdk.setConfig({ font_size: value }); }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(cfg) {
+      return new Map([
+        ['hero_name', cfg.hero_name || defaultConfig.hero_name],
+        ['hero_title', cfg.hero_title || defaultConfig.hero_title],
+        ['hero_subtitle', cfg.hero_subtitle || defaultConfig.hero_subtitle],
+        ['about_text', cfg.about_text || defaultConfig.about_text],
+        ['contact_email', cfg.contact_email || defaultConfig.contact_email],
+        ['contact_phone', cfg.contact_phone || defaultConfig.contact_phone],
+        ['contact_location', cfg.contact_location || defaultConfig.contact_location]
+      ]);
+    }
+
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking links
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.add('hidden');
+      });
+    });
+
+    // Project filter functionality
+    const filterButtons = document.querySelectorAll('.project-filter');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        
+        filterButtons.forEach(b => {
+          b.style.background = 'var(--background)';
+          b.classList.remove('active');
+        });
+        btn.style.background = 'var(--primary-action)';
+        btn.classList.add('active');
+        
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'block';
+            card.style.animation = 'fadeIn 0.4s ease forwards';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Scroll reveal animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('revealed');
+          }, index * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Skill category switching
+    const skillCategoryBtns = document.querySelectorAll('.skill-category-btn');
+    const skillCategoryContents = document.querySelectorAll('.skill-category-content');
+
+    skillCategoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.category;
+        
+        // Update buttons
+        skillCategoryBtns.forEach(b => {
+          b.style.background = 'var(--surface)';
+          b.classList.remove('active');
+        });
+        btn.style.background = 'var(--primary-action)';
+        btn.classList.add('active');
+        
+        // Update content
+        skillCategoryContents.forEach(content => {
+          if (content.dataset.category === category) {
+            content.classList.remove('hidden');
+            content.style.animation = 'fadeIn 0.5s ease forwards';
+          } else {
+            content.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Back to top button
+    const backToTopBtn = document.getElementById('back-to-top');
+    const appWrapper = document.getElementById('app-wrapper');
+
+    appWrapper.addEventListener('scroll', () => {
+      if (appWrapper.scrollTop > 300) {
+        backToTopBtn.style.opacity = '1';
+        backToTopBtn.style.pointerEvents = 'auto';
+      } else {
+        backToTopBtn.style.opacity = '0';
+        backToTopBtn.style.pointerEvents = 'none';
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      appWrapper.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Initialize SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    } else {
+      onConfigChange(defaultConfig);
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c3e9ea746b8b1ea',t:'MTc2OTQxNTkyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
