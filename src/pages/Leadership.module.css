@@ -1,0 +1,95 @@
+.hero {
+  padding-block: var(--space-7) var(--space-8);
+}
+.heroGrid {
+  display: grid;
+  gap: var(--space-7);
+  align-items: center;
+}
+.heroMedia figure {
+  margin: 0;
+}
+.heroMedia img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  max-height: 72vh;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: calc(var(--radius) + 6px);
+  border: 1px solid var(--border-strong);
+  box-shadow:
+    0 0 70px -16px rgb(124 58 237 / 0.75),
+    0 0 140px -50px rgb(244 114 182 / 0.55);
+}
+.heroMedia figcaption {
+  margin-top: var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+.h1 {
+  font-size: var(--fs-h1);
+}
+.role {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--primary-text);
+}
+.story {
+  margin-top: var(--space-4);
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  max-width: 64ch;
+}
+@media (min-width: 900px) {
+  .hero {
+    padding-block: var(--space-9);
+  }
+  .heroGrid {
+    grid-template-columns: 5fr 7fr;
+    gap: var(--space-8);
+  }
+  .heroText {
+    order: 2;
+  }
+}
+
+.section {
+  padding-block: var(--space-8) var(--space-9);
+}
+.band {
+  background: linear-gradient(180deg, transparent, rgb(18 11 34 / 0.85) 10%, rgb(18 11 34 / 0.85) 90%, transparent);
+}
+.h2 {
+  font-size: var(--fs-h2);
+  margin-bottom: var(--space-6);
+}
+
+.volunteer {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+}
+.volunteerText .h2 {
+  margin-block: var(--space-4) 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+.icon {
+  color: var(--accent);
+}
+/* Two volunteering photos side by side. */
+.volunteerPhotos ul {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 900px) {
+  .volunteer {
+    grid-template-columns: 5fr 7fr;
+    gap: var(--space-8);
+  }
+}

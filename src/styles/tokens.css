@@ -1,0 +1,64 @@
+/* Design tokens — see design-system/MASTER.md. Components use these, never raw hex. */
+:root {
+  color-scheme: dark;
+
+  --bg: #0b0716;
+  --surface: #120b22;
+  --card: #17102a;
+  --card-hover: #1d1435;
+  --border: #2c2049;
+  --border-strong: #46346f;
+
+  --text: #eeeaf8;
+  --text-muted: #a9a1c4;
+
+  --primary: #7c3aed;
+  --primary-strong: #6d28d9;
+  --primary-text: #b79cff;
+  --on-primary: #ffffff;
+  --accent: #f472b6;
+  --success: #4ade80;
+  --ring: #b79cff;
+
+  --glow: 0 0 0 1px rgb(124 58 237 / 0.55), 0 12px 40px -8px rgb(124 58 237 / 0.45);
+  --glow-soft: 0 0 32px -6px rgb(124 58 237 / 0.35);
+
+  --font-heading: 'Space Grotesk Variable', system-ui, sans-serif;
+  --font-body: 'Inter Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+
+  --fs-h1: clamp(2.5rem, 6vw, 4.5rem);
+  --fs-h2: clamp(1.75rem, 3.5vw, 2.5rem);
+  --fs-h3: 1.25rem;
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-xs: 0.8125rem;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-pill: 999px;
+
+  --container: 1160px;
+  --gutter: 20px;
+  --nav-h: 68px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur: 220ms;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+  }
+}

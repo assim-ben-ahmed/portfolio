@@ -1,0 +1,14 @@
+_sources/
+_inbox/
+# Content notes and open questions — private; delete this line to publish them.
+_brief/
+.env
+*.env
+credentials.json
+.DS_Store
+Thumbs.db
+
+node_modules/
+dist/
+__pycache__/
+*.pyc

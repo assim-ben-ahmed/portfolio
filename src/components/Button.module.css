@@ -1,0 +1,50 @@
+/* Shared button styles — real <a>/<button>, ≥44px targets. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1.2;
+  text-align: center;
+  border: 1px solid transparent;
+  transition:
+    background-color var(--dur-fast),
+    border-color var(--dur-fast),
+    box-shadow var(--dur),
+    transform var(--dur);
+}
+.btn:active {
+  transform: scale(0.98);
+}
+
+.primary {
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: var(--glow-soft);
+}
+.primary:hover {
+  background: var(--primary-strong);
+  box-shadow: var(--glow);
+}
+
+.secondary {
+  background: rgb(124 58 237 / 0.12);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.secondary:hover {
+  border-color: var(--primary-text);
+  background: rgb(124 58 237 / 0.2);
+}
+
+.ghost {
+  color: var(--primary-text);
+}
+.ghost:hover {
+  color: var(--text);
+}

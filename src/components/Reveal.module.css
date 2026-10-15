@@ -1,0 +1,23 @@
+/* Hidden until revealed. Uses an animation (not a transition) so components keep their own
+   hover transitions and `translate` — the keyframes only apply while the reveal plays. */
+.reveal:not(.in):not(.shown) {
+  opacity: 0;
+}
+.in {
+  animation: reveal-in 450ms var(--ease-out) var(--reveal-delay, 0ms) backwards;
+}
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal:not(.in):not(.shown) {
+    opacity: 1;
+  }
+  .in {
+    animation: none;
+  }
+}

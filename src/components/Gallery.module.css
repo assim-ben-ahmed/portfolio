@@ -1,0 +1,163 @@
+/* Ordered grid (left → right) so event groups stay together; uniform 4:3 thumbs, full photo in the lightbox. */
+.grid {
+  display: grid;
+  gap: var(--space-5) var(--space-4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.item {
+  min-width: 0;
+}
+.figure {
+  margin: 0;
+}
+.figure figcaption {
+  margin-top: var(--space-2);
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+
+.thumb {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  cursor: zoom-in;
+  transition:
+    border-color var(--dur),
+    box-shadow var(--dur);
+}
+.thumb img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 30%;
+  transition: transform 400ms var(--ease-out);
+}
+.thumb:hover,
+.thumb:focus-visible {
+  border-color: rgb(124 58 237 / 0.7);
+  box-shadow: var(--glow);
+}
+.thumb:hover img {
+  transform: scale(1.03);
+}
+.video {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* ---------- Lightbox ---------- */
+.dialog {
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: var(--space-8) var(--space-4) var(--space-5);
+  border: 0;
+  background: rgb(6 3 13 / 0.94);
+  color: var(--text);
+}
+.dialog::backdrop {
+  background: transparent;
+}
+.dialog[open] {
+  display: grid;
+  place-items: center;
+  animation: fadeIn 200ms var(--ease-out);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+.lbFigure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: 100%;
+  max-height: 100%;
+}
+.lbImg {
+  max-width: min(100%, 1100px);
+  max-height: calc(100dvh - 160px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+.lbFigure figcaption {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: space-between;
+  width: 100%;
+  max-width: 900px;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+.counter {
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+.lbBtn {
+  position: fixed;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: rgb(23 16 42 / 0.9);
+  color: var(--text);
+  transition:
+    border-color var(--dur-fast),
+    background-color var(--dur-fast);
+}
+.lbBtn:hover {
+  border-color: var(--primary-text);
+  background: var(--card-hover);
+}
+.close {
+  top: 16px;
+  right: 16px;
+}
+.prev,
+.next {
+  top: 50%;
+  translate: 0 -50%;
+}
+.prev {
+  left: 12px;
+}
+.next {
+  right: 12px;
+}
+@media (max-width: 599px) {
+  .prev,
+  .next {
+    top: auto;
+    bottom: 16px;
+    translate: none;
+  }
+}

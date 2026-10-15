@@ -1,0 +1,155 @@
+.page {
+  padding-block: var(--space-7) var(--space-9);
+  min-height: 80vh;
+}
+@media (min-width: 900px) {
+  .page {
+    padding-top: var(--space-9);
+  }
+}
+.h1 {
+  font-size: var(--fs-h1);
+  margin-bottom: var(--space-7);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  /* Photo cards take two rows so the grid reads as a bento. */
+  .withCover {
+    grid-row: span 2;
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition:
+    translate var(--dur) var(--ease-out),
+    border-color var(--dur),
+    box-shadow var(--dur);
+}
+.card:has(.link):hover,
+.card:focus-within {
+  translate: 0 -4px;
+  border-color: rgb(124 58 237 / 0.7);
+  box-shadow: var(--glow);
+}
+.cover {
+  flex: 1;
+  min-height: 200px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.cover picture,
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cover img {
+  transition: transform 400ms var(--ease-out);
+}
+.card:hover .cover img {
+  transform: scale(1.04);
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+.icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgb(124 58 237 / 0.35), rgb(244 114 182 / 0.25));
+  border: 1px solid rgb(124 58 237 / 0.5);
+  color: var(--text);
+}
+.title {
+  font-size: var(--fs-h3);
+}
+.link {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--text);
+}
+.link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.link:focus-visible {
+  outline: none;
+}
+.card:has(.link:focus-visible) {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+.arrow {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--primary-text);
+}
+.text {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+/* ---------- Morocco trip ---------- */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+.back:hover {
+  color: var(--primary-text);
+}
+.tripHeader {
+  max-width: 820px;
+  margin-block: var(--space-5) var(--space-7);
+}
+.tripHeader .h1 {
+  margin-bottom: 0;
+}
+.dates {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--primary-text);
+}
+.tripText {
+  margin-top: var(--space-5);
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
