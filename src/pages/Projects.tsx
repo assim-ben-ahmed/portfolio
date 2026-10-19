@@ -6,7 +6,7 @@ import { ProjectCard } from '../components/ProjectCard'
 import { Reveal } from '../components/Reveal'
 import s from './Projects.module.css'
 
-const FILTERS: Filter[] = ['experience', 'hackathons', 'clinic', 'startup']
+const FILTERS: Filter[] = ['experience', 'hackathons', 'clinic', 'startup', 'side']
 
 export function Projects() {
   const { t } = useI18n()

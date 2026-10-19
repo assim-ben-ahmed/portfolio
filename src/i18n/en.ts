@@ -64,10 +64,12 @@ export const en = {
       hackathons: 'Hackathons & awards',
       clinic: 'AI Clinic',
       startup: 'Startup',
+      side: 'Side projects', // UNAPPROVED
     },
     links: {
       demo: 'Demo video',
       photos: 'Photos',
+      screenshots: 'Screenshots', // UNAPPROVED
       github: 'GitHub',
       githubComing: 'GitHub (coming)',
       leanCanvas: 'Lean Canvas',
@@ -172,11 +174,6 @@ export const en = {
         text: "aivancity's consulting programme, where students deliver real AI missions for partner companies. Three missions, three 20/20 defences.",
         bullets: [
           {
-            name: 'Pitchboy (2025–26):',
-            slug: 'pitchboy',
-            text: 'speech recognition and emotion analysis on interview recordings, combining audio prosody and RoBERTa text sentiment.',
-          },
-          {
             name: 'Shift Technology (2024–25):',
             slug: 'shift-technology',
             text: 'helped the client choose a CRM in a crowded market: requirements, a selection-criteria grid, a Python-scraped benchmark and a data-driven recommendation.',
@@ -185,6 +182,11 @@ export const en = {
             name: 'Beparentalis (2023–24):',
             slug: 'beparentalis',
             text: 'benchmarked and fine-tuned LLMs (Hugging Face) to improve a French pediatric chatbot giving first-time parents safe guidance.',
+          },
+          {
+            name: 'Pitchboy (2023–24):',
+            slug: 'pitchboy',
+            text: "speech recognition and emotion analysis on interview recordings, combining audio prosody and RoBERTa text sentiment. My first mission with a real company, in the first semester of PGE1.",
           },
         ],
         stack: '',

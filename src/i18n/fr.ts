@@ -65,10 +65,12 @@ export const fr: Dict = {
       hackathons: 'Hackathons & prix', // UNAPPROVED
       clinic: 'AI Clinic',
       startup: 'Startup',
+      side: 'Projets perso', // UNAPPROVED
     },
     links: {
       demo: 'Vidéo de démo', // UNAPPROVED
       photos: 'Photos',
+      screenshots: "Captures d'écran", // UNAPPROVED
       github: 'GitHub',
       githubComing: 'GitHub (bientôt)', // UNAPPROVED
       leanCanvas: 'Lean Canvas',
@@ -179,11 +181,6 @@ export const fr: Dict = {
         text: "Le programme de conseil d'aivancity, où les étudiants mènent de vraies missions IA pour des entreprises partenaires. Trois missions, trois soutenances à 20/20.",
         bullets: [
           {
-            name: 'Pitchboy (2025–26) :',
-            slug: 'pitchboy',
-            text: 'reconnaissance vocale et analyse des émotions sur des entretiens enregistrés, combinant prosodie audio et sentiment textuel avec RoBERTa.',
-          },
-          {
             name: 'Shift Technology (2024–25) :',
             slug: 'shift-technology',
             text: "accompagnement du client dans le choix d'un CRM sur un marché saturé : besoins, grille de critères, benchmark par scraping Python et recommandation fondée sur les données.",
@@ -192,6 +189,11 @@ export const fr: Dict = {
             name: 'Beparentalis (2023–24) :',
             slug: 'beparentalis',
             text: 'benchmark et fine-tuning de LLM (Hugging Face) pour améliorer un chatbot pédiatrique français qui guide les jeunes parents en toute sécurité.',
+          },
+          {
+            name: 'Pitchboy (2023–24) :',
+            slug: 'pitchboy',
+            text: "reconnaissance vocale et analyse des émotions sur des entretiens enregistrés, combinant prosodie audio et sentiment textuel avec RoBERTa. Ma première mission pour une vraie entreprise, au premier semestre de PGE1.",
           },
         ],
         stack: '',

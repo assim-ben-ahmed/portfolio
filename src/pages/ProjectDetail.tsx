@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { m, useReducedMotion } from 'framer-motion'
 import { ArrowLeft, ExternalLink, FileText, Images, PlayCircle } from 'lucide-react'
 import { useI18n, useL } from '../i18n'
-import { getProject, type Media, type ProjectLink } from '../data/projects'
+import { getProject, picFor, type Media, type ProjectLink } from '../data/projects'
 import { projectDetails } from '../data/projectDetails'
 import { GitHubIcon } from '../components/Icons'
 import { Pic } from '../components/Pic'
@@ -14,7 +14,7 @@ import s from './ProjectDetail.module.css'
 
 export function ProjectDetail() {
   const { slug = '' } = useParams()
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const l = useL()
   const project = getProject(slug)
 
@@ -71,9 +71,9 @@ export function ProjectDetail() {
           )}
         </header>
 
-        <m.div layoutId={`cover-${project.slug}`} className={s.cover} style={coverStyle(project.cover?.pic)}>
+        <m.div layoutId={`cover-${project.slug}`} className={s.cover} style={coverStyle(project.cover && picFor(project.cover, lang))}>
           {project.cover ? (
-            <Pic pic={project.cover.pic} alt={l(project.cover.alt)} eager sizes="(min-width: 1160px) 1160px, 100vw" />
+            <Pic pic={picFor(project.cover, lang)} alt={l(project.cover.alt)} eager sizes="(min-width: 1160px) 1160px, 100vw" />
           ) : (
             <div className={s.placeholder} aria-hidden="true">
               <span>{title.split(' — ')[0]}</span>
@@ -138,6 +138,7 @@ function galleryClass(m: Media) {
 
 function MediaItem({ media }: { media: Media }) {
   const l = useL()
+  const { lang } = useI18n()
   const reduce = useReducedMotion()
   const alt = l(media.alt)
   if (media.kind === 'video') {
@@ -163,9 +164,9 @@ function MediaItem({ media }: { media: Media }) {
   }
   return (
     <figure className={s.figure}>
-      <a href={media.pic.img.src} target="_blank" rel="noopener noreferrer" className={s.zoom}>
+      <a href={picFor(media, lang).img.src} target="_blank" rel="noopener noreferrer" className={s.zoom}>
         <Pic
-          pic={media.pic}
+          pic={picFor(media, lang)}
           alt={alt}
           sizes={galleryClass(media) === s.tall ? '(min-width: 768px) 280px, 50vw' : '(min-width: 900px) 560px, 100vw'}
         />
@@ -186,7 +187,7 @@ function LinkButton({ link }: { link: ProjectLink }) {
       </span>
     )
   }
-  if (link.kind === 'demo' || link.kind === 'photos') {
+  if (link.kind === 'demo' || link.kind === 'photos' || link.kind === 'screenshots') {
     const Icon = link.kind === 'demo' ? PlayCircle : Images
     return (
       <a href={link.href} className={`${b.btn} ${b.primary}`}>

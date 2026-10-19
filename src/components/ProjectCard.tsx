@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom'
 import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useI18n, useL } from '../i18n'
-import type { Project } from '../data/projects'
+import { picFor, type Project } from '../data/projects'
 import { Pic } from './Pic'
 import s from './ProjectCard.module.css'
 
 /** Glowing project card. The cover and title carry `layoutId`s so the detail page can expand from them. */
 /** `headingLevel`: 3 under a section h2 (Home), 2 directly under the page h1 (Projects page). */
 export function ProjectCard({ project, headingLevel = 3 }: { project: Project; headingLevel?: 2 | 3 }) {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const l = useL()
   const title = l(project.title)
   const Heading = headingLevel === 2 ? 'h2' : 'h3'
@@ -18,7 +18,7 @@ export function ProjectCard({ project, headingLevel = 3 }: { project: Project; h
     <m.article layoutId={`card-${project.slug}`} className={s.card}>
       <m.div layoutId={`cover-${project.slug}`} className={s.cover}>
         {project.cover ? (
-          <Pic pic={project.cover.pic} alt={l(project.cover.alt)} sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw" />
+          <Pic pic={picFor(project.cover, lang)} alt={l(project.cover.alt)} sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw" />
         ) : (
           // No photo yet (assets.md): styled cover with the project name.
           <div className={s.placeholder} aria-hidden="true">
