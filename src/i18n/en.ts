@@ -35,7 +35,7 @@ export const en = {
     name: 'Assim Ben Ahmed',
     titles: ['AI Engineer', 'Data Scientist', 'Former BDE President', 'Hackathon podium x2'],
     pitch: 'I build AI that ships, and lead the teams that ship it.',
-    status: 'Available now · 24-month alternance · Paris',
+    status: 'Available now · 12- or 24-month alternance · Paris',
     subline:
       'AI & Data Science student at aivancity, 2nd of my cohort. 3 weeks in the company, 1 week at school.',
     cv: 'Download CV',
@@ -138,7 +138,7 @@ export const en = {
       { label: 'Next on my list', value: 'Learning sign language and Spanish' },
       {
         label: 'Looking for',
-        value: 'A 24-month alternance as AI Engineer / Data Scientist, available now',
+        value: 'A 12- or 24-month alternance as AI Engineer / Data Scientist, available now',
       },
     ],
   },
@@ -253,7 +253,7 @@ export const en = {
   },
   contact: {
     title: "Let's build something together",
-    text: "I'm available now for a 24-month alternance as an AI Engineer or Data Scientist in Paris (3 weeks in the company, 1 week at school). The fastest way to reach me is email.",
+    text: "I'm available now for a 12- or 24-month alternance as an AI Engineer or Data Scientist in Paris (3 weeks in the company, 1 week at school). The fastest way to reach me is email.",
     mainButton: 'Email me — assimben2004@gmail.com',
     secondary: 'School email: assim.ahmed@aivancity.education',
     linkedin: 'LinkedIn',
@@ -263,6 +263,14 @@ export const en = {
   },
   footer: {
     copyright: '© 2026 Assim Ben Ahmed',
+    analytics: 'This site uses audience measurement (Google Analytics) only if you consent.', // UNAPPROVED
+    cookieSettings: 'Cookie settings', // UNAPPROVED
+  },
+  cookies: {
+    title: 'Cookies & audience measurement', // UNAPPROVED
+    body: 'With your consent, Google Analytics measures visits to improve this portfolio (no advertising). You can change your choice at any time from “Cookie settings” in the footer.', // UNAPPROVED
+    accept: 'Accept', // UNAPPROVED
+    refuse: 'Refuse', // UNAPPROVED
   },
   notFound: {
     title: 'Page not found', // UNAPPROVED

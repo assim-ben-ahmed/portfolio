@@ -16,6 +16,23 @@
   color: var(--text-muted);
   font-size: var(--fs-small);
 }
+.legal {
+  display: grid;
+  gap: var(--space-1);
+}
+.settings {
+  padding: var(--space-2) 0;
+  background: none;
+  border: 0;
+  color: var(--primary-text);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.settings:hover {
+  color: var(--text);
+}
 .copy a {
   text-decoration: underline;
   text-underline-offset: 3px;

@@ -6,6 +6,8 @@ import { Nav } from './Nav'
 import { Footer } from './Footer'
 import { Particles } from './Particles'
 import { endPrerenderBoot } from './Reveal'
+import { CookieBanner } from './CookieBanner'
+import { initAnalytics, trackClicks, trackPageView } from '../lib/analytics'
 
 /** Scroll to top on page change, or to the #hash target (e.g. /#contact). */
 function useScrollRestore() {
@@ -18,6 +20,22 @@ function useScrollRestore() {
     }
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [pathname, hash])
+}
+
+/**
+ * Google Analytics (only after consent, never on localhost): starts GA if accepted earlier, sends a page_view
+ * on every route change (full path, /portfolio/ base included) and listens for the tracked clicks.
+ */
+function useAnalytics() {
+  const { pathname, search } = useLocation()
+  useEffect(() => {
+    initAnalytics()
+    document.addEventListener('click', trackClicks, true)
+    return () => document.removeEventListener('click', trackClicks, true)
+  }, [])
+  useEffect(() => {
+    trackPageView()
+  }, [pathname, search])
 }
 
 /**
@@ -35,6 +53,7 @@ export function Layout() {
   const outlet = useOutlet()
   const reduce = useReducedMotion()
   useScrollRestore()
+  useAnalytics()
 
   return (
     <>
@@ -61,6 +80,7 @@ export function Layout() {
         </AnimatePresence>
       </LayoutGroup>
       <Footer />
+      <CookieBanner />
     </>
   )
 }

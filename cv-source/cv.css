@@ -1,0 +1,81 @@
+/* Shared A4 layout for both CVs (same look as the previous Word / Google Docs versions). */
+@page {
+  size: A4;
+  margin: 9mm 13mm 7mm;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Calibri, Carlito, 'Segoe UI', sans-serif;
+  font-size: 9.2pt;
+  line-height: 1.16;
+  color: #1a1a1a;
+}
+a {
+  color: #1155cc;
+}
+header {
+  text-align: center;
+  margin-bottom: 4pt;
+}
+h1 {
+  margin: 0 0 2pt;
+  color: #1f3a6e;
+  font-size: 19pt;
+  letter-spacing: 0.3pt;
+}
+.contact,
+.links {
+  color: #555;
+  font-size: 8.6pt;
+}
+.target {
+  font-weight: 700;
+  margin: 1pt 0;
+}
+h2 {
+  margin: 5pt 0 2.5pt;
+  padding-bottom: 2pt;
+  border-bottom: 1.4pt solid #1f3a6e;
+  color: #1f3a6e;
+  font-size: 11pt;
+  text-transform: uppercase;
+}
+p {
+  margin: 0;
+}
+.item {
+  margin-top: 3pt;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12pt;
+}
+.row b {
+  font-size: 10pt;
+}
+.date {
+  white-space: nowrap;
+  color: #555;
+  font-style: italic;
+}
+.sub {
+  color: #555;
+  font-style: italic;
+  margin-top: 1pt;
+}
+ul {
+  margin: 1.5pt 0 0;
+  padding-left: 13pt;
+}
+li {
+  margin: 0.6pt 0;
+  text-align: justify;
+}
+.muted {
+  color: #555;
+  font-style: italic;
+}

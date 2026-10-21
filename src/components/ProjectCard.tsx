@@ -31,7 +31,7 @@ export function ProjectCard({ project, headingLevel = 3 }: { project: Project; h
         <span className={s.tag}>{t.projects.filters[project.filter]}</span>
         <Heading className={s.title}>
           {/* Stretched link: the whole card is clickable, one tab stop. */}
-          <Link to={`/projects/${project.slug}`} className={s.link}>
+          <Link to={`/projects/${project.slug}`} className={s.link} data-project-card={project.slug}>
             <m.span layoutId={`title-${project.slug}`} className={s.titleText}>
               {title}
             </m.span>

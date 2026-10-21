@@ -37,7 +37,7 @@ export const fr: Dict = {
     name: 'Assim Ben Ahmed',
     titles: ['Ingénieur IA', 'Data Scientist', 'Ancien Président du BDE', '2 podiums en hackathon'],
     pitch: 'Je conçois une IA qui passe en production, et je fédère les équipes qui la livrent.',
-    status: 'Disponible immédiatement · Alternance 24 mois · Paris',
+    status: 'Disponible immédiatement · Alternance 12 ou 24 mois · Paris',
     subline:
       "Étudiant en IA & Data Science à aivancity, 2e de ma promotion. Rythme : 3 semaines en entreprise, 1 semaine à l'école.",
     cv: 'Télécharger mon CV',
@@ -145,7 +145,7 @@ export const fr: Dict = {
       {
         label: 'Je recherche', // UNAPPROVED (label)
         value:
-          "Une alternance de 24 mois en tant qu'Ingénieur IA / Data Scientist, disponible immédiatement",
+          "Une alternance de 12 ou 24 mois en tant qu'Ingénieur IA / Data Scientist, disponible immédiatement",
       },
     ],
   },
@@ -260,7 +260,7 @@ export const fr: Dict = {
   },
   contact: {
     title: 'Construisons quelque chose ensemble',
-    text: "Je suis disponible immédiatement pour une alternance de 24 mois en tant qu'Ingénieur IA ou Data Scientist à Paris (3 semaines en entreprise, 1 semaine à l'école). Le plus rapide pour me joindre : l'email.",
+    text: "Je suis disponible immédiatement pour une alternance de 12 ou 24 mois en tant qu'Ingénieur IA ou Data Scientist à Paris (3 semaines en entreprise, 1 semaine à l'école). Le plus rapide pour me joindre : l'email.",
     mainButton: "M'écrire — assimben2004@gmail.com",
     secondary: 'Email école : assim.ahmed@aivancity.education',
     linkedin: 'LinkedIn',
@@ -270,6 +270,14 @@ export const fr: Dict = {
   },
   footer: {
     copyright: '© 2026 Assim Ben Ahmed',
+    analytics: 'Ce site utilise une mesure d’audience (Google Analytics) uniquement avec votre consentement.', // UNAPPROVED
+    cookieSettings: 'Paramètres des cookies', // UNAPPROVED
+  },
+  cookies: {
+    title: 'Cookies et mesure d’audience', // UNAPPROVED
+    body: 'Avec votre accord, Google Analytics mesure les visites pour améliorer ce portfolio (aucune publicité). Vous pouvez modifier votre choix à tout moment via « Paramètres des cookies » en bas de page.', // UNAPPROVED
+    accept: 'Accepter', // UNAPPROVED
+    refuse: 'Refuser', // UNAPPROVED
   },
   notFound: {
     title: 'Page introuvable', // UNAPPROVED
