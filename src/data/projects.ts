@@ -98,7 +98,7 @@ export type Media = ImageMedia | VideoMedia
 
 export type ProjectLink =
   | { kind: 'demo' | 'photos' | 'screenshots'; href: `#${string}` } // in-page anchor on the detail page
-  | { kind: 'github' | 'leanCanvas'; href: string }
+  | { kind: 'github' | 'leanCanvas' | 'live'; href: string } // 'live': a running app (opens in a new tab)
   | { kind: 'githubComing' }
 
 export type Project = {
@@ -405,7 +405,7 @@ export const projects: Project[] = [
         },
       },
     ],
-    links: [{ kind: 'screenshots', href: '#media' }],
+    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/travel-agency-ai-platform' }],
   },
   {
     slug: 'gmail-ai-assistant',
@@ -505,7 +505,7 @@ export const projects: Project[] = [
         },
       },
     ],
-    links: [{ kind: 'githubComing' }],
+    links: [{ kind: 'github', href: 'https://github.com/assim-ben-ahmed/al-safa-2-park' }],
   },
   {
     slug: 'vitalight',
@@ -596,7 +596,7 @@ export const projects: Project[] = [
         alt: { en: 'VitaLight Lean Canvas', fr: 'Lean Canvas de VitaLight' },
       },
     ],
-    links: [{ kind: 'leanCanvas', href: vitaCanvasPdf }],
+    links: [{ kind: 'leanCanvas', href: vitaCanvasPdf }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/vitalight' }],
   },
   {
     slug: 'pitchboy',
@@ -670,7 +670,7 @@ export const projects: Project[] = [
       },
     ],
     // GitHub link to add once Assim publishes the repo.
-    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'githubComing' }],
+    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/interview-voice-analyzer' }],
   },
   {
     // From the project code (Portfolio/Video rag Faculties, Apr 2026) — not in content.md yet. All text UNAPPROVED.
@@ -734,7 +734,7 @@ export const projects: Project[] = [
       },
     ],
     // GitHub link to add once Assim publishes the repo.
-    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'githubComing' }],
+    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'live', href: 'https://assim-ben-ahmed.github.io/video-rag/' }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/video-rag' }],
   },
   {
     slug: 'shift-technology',
@@ -801,7 +801,7 @@ export const projects: Project[] = [
       },
     ],
     // GitHub link to add once Assim publishes the repo.
-    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'githubComing' }],
+    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/crmbench' }],
   },
   {
     slug: 'beparentalis',
@@ -884,7 +884,7 @@ export const projects: Project[] = [
       },
     ],
     // GitHub link to add once Assim publishes the repo.
-    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'githubComing' }],
+    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/pediabot' }],
   },
   {
     // Rewritten Oct 2026 from the mission's code (PGE3/Semester 1/AI Clinic) and the clean rebuild in
@@ -951,7 +951,7 @@ export const projects: Project[] = [
       },
     ],
     // GitHub link to add once Assim publishes the repo.
-    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'githubComing' }],
+    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/biometric-health-monitoring' }],
   },
   {
     // Side project (Portfolio/Study Buddy, Oct 2026), rebuilt from Assim's HTML prototype. All text UNAPPROVED.
@@ -1015,7 +1015,7 @@ export const projects: Project[] = [
       },
     ],
     // GitHub link to add once Assim publishes the repo; a live link once it is deployed.
-    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'githubComing' }],
+    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/study-buddy' }],
   },
   {
     // Side project (Portfolio/hand motion media player, Oct 2026). All text UNAPPROVED.
@@ -1071,7 +1071,7 @@ export const projects: Project[] = [
       },
     ],
     // GitHub link to add once Assim publishes the repo.
-    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'githubComing' }],
+    links: [{ kind: 'screenshots', href: '#media' }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/gesture-player' }],
   },
 ]
 

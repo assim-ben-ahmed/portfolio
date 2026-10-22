@@ -74,6 +74,7 @@ export const fr: Dict = {
       github: 'GitHub',
       githubComing: 'GitHub (bientôt)', // UNAPPROVED
       leanCanvas: 'Lean Canvas',
+      live: 'Démo interactive', // UNAPPROVED
     },
   },
   projectsPage: {
@@ -165,7 +166,7 @@ export const fr: Dict = {
       {
         org: 'WellPack',
         slug: 'wellpack-manager',
-        role: 'Stagiaire Data & IA', // UNAPPROVED (FR role)
+        role: 'Chef de projet Automatisation & IA (stage)',
         period: 'avr.–juil. 2025',
         place: 'Paris',
         text: "Au sein d'une équipe de 4 stagiaires, j'ai conçu et livré WellPack Manager, une plateforme IA interne déployée sur Azure en microservices Docker : un pipeline ML pour les campagnes SMS validé par la direction, une automatisation des KPI du CRM Pipedrive que j'ai menée seul, et des agents Mistral pour Pipedrive et Gmail.",

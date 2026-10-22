@@ -73,6 +73,7 @@ export const en = {
       github: 'GitHub',
       githubComing: 'GitHub (coming)',
       leanCanvas: 'Lean Canvas',
+      live: 'Interactive demo', // UNAPPROVED
     },
   },
   projectsPage: {
@@ -158,7 +159,7 @@ export const en = {
       {
         org: 'WellPack',
         slug: 'wellpack-manager',
-        role: 'Data & AI Intern',
+        role: 'Automation and AI Project Manager (Internship)',
         period: 'Apr–Jul 2025',
         place: 'Paris',
         text: 'Part of a 4-intern team, I designed and shipped WellPack Manager, an internal AI platform deployed on Azure as Docker microservices: an ML pipeline for SMS campaigns approved by company executives, a Pipedrive CRM KPI automation I led solo, and Mistral-powered agents for Pipedrive and Gmail.',
