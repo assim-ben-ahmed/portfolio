@@ -248,7 +248,7 @@ export const projects: Project[] = [
       },
     ],
     // GitHub link to add once Assim publishes the repo.
-    links: [{ kind: 'photos', href: '#media' }, { kind: 'githubComing' }],
+    links: [{ kind: 'photos', href: '#media' }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/aivancity-hub' }],
   },
   {
     slug: 'aquanova',
@@ -596,7 +596,7 @@ export const projects: Project[] = [
         alt: { en: 'VitaLight Lean Canvas', fr: 'Lean Canvas de VitaLight' },
       },
     ],
-    links: [{ kind: 'leanCanvas', href: vitaCanvasPdf }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/vitalight' }],
+    links: [{ kind: 'live', href: 'https://assim-ben-ahmed.github.io/vitalight/' }, { kind: 'leanCanvas', href: vitaCanvasPdf }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/vitalight' }],
   },
   {
     slug: 'pitchboy',
