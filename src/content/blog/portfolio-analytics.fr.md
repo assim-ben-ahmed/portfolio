@@ -3,6 +3,7 @@ title: "J'ai mis un tracker sur mon propre portfolio. Voilà ce que la première
 date: 2026-10-27
 tags: [notes, portfolio, google-analytics, web-analytics, data]
 summary: "19 visiteurs, 37 visites, 291 pages vues : ce qu'une semaine de Google Analytics m'a appris sur mon propre portfolio, y compris le fait que mon plus gros visiteur, c'était moi."
+seo_description: "Ce que Google Analytics m'a appris sur mon portfolio : d'où viennent les visiteurs, ce qu'ils ouvrent, et les bugs que les données ont révélés."
 cover: portfolio-analytics/cover-fr.jpg
 cover_alt: "La page d'accueil du nouveau portfolio"
 ---

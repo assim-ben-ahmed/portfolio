@@ -49,7 +49,8 @@ export type Post = {
   tags: string[]
   lang: Lang
   languages: Lang[] // every language this post exists in
-  summary: string
+  summary: string // the lede under the title
+  seoDescription: string // meta/og/twitter description and listing card; falls back to the summary
   readingMinutes: number
   cover?: string
   coverAlt: string
@@ -123,6 +124,7 @@ const versions: Post[] = Object.entries(files)
       lang: suffix ?? (data.lang === 'fr' ? 'fr' : 'en'),
       languages: [],
       summary: String(data.summary ?? ''),
+      seoDescription: String(data.seo_description ?? data.summary ?? ''),
       readingMinutes: data.reading_time ? parseInt(String(data.reading_time), 10) || 1 : Math.max(1, Math.round(words / 200)),
       cover,
       coverAlt: String(data.cover_alt ?? ''),

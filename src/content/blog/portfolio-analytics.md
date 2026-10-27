@@ -4,6 +4,7 @@ date: 2026-10-27
 tags: [notes, portfolio, google-analytics, web-analytics, data]
 lang: en
 summary: "19 visitors, 37 visits, 291 page views: what one week of Google Analytics taught me about my own portfolio, including the fact that my biggest visitor was me."
+seo_description: "What adding Google Analytics to my portfolio taught me: where visitors come from, what they open, and the bugs the data caught."
 cover: portfolio-analytics/cover.jpg
 cover_alt: "The new portfolio homepage"
 ---

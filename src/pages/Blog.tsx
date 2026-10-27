@@ -79,9 +79,9 @@ export function Blog() {
                           <ArrowUpRight size={18} aria-hidden="true" className={s.arrow} />
                         </Link>
                       </h2>
-                      {p.summary && (
+                      {p.seoDescription && (
                         <p className={s.summary} lang={p.lang}>
-                          {p.summary}
+                          {p.seoDescription}
                         </p>
                       )}
                       {p.tags.length > 0 && (
@@ -147,7 +147,7 @@ export function BlogPost() {
   return (
     <article className={s.page} lang={post.lang}>
       <title>{`${post.title} — ${t.meta.siteName}`}</title>
-      {post.summary && <meta name="description" content={post.summary} />}
+      {post.seoDescription && <meta name="description" content={post.seoDescription} />}
       {post.cover && <meta name="share-image" content={post.cover} data-alt={post.coverAlt} />}
       <div className={`container ${s.postWrap}`}>
         <Link to="/blog" className={s.back} lang={lang}>
