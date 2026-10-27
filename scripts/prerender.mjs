@@ -52,6 +52,23 @@ while (queue.length) {
       head.querySelector('meta[charset]').after(canonical) // early: the app loader reads it (deferAppScript)
       head.querySelector('meta[property="og:url"]')?.setAttribute('content', url)
 
+      // Link previews (LinkedIn, WhatsApp…) use this page's own title and description, and a blog post's cover
+      // when it declares one with <meta name="share-image">.
+      const setMeta = (selector, value) => value && head.querySelector(selector)?.setAttribute('content', value)
+      const description = [...head.querySelectorAll('meta[name="description"]')].pop()?.getAttribute('content')
+      for (const sel of ['meta[property="og:title"]', 'meta[name="twitter:title"]']) setMeta(sel, document.title)
+      for (const sel of ['meta[property="og:description"]', 'meta[name="twitter:description"]']) setMeta(sel, description)
+      const share = head.querySelector('meta[name="share-image"]')
+      if (share) {
+        const image = site + share.getAttribute('content').slice(base.length)
+        for (const sel of ['meta[property="og:image"]', 'meta[name="twitter:image"]']) setMeta(sel, image)
+        setMeta('meta[property="og:image:width"]', '1600')
+        setMeta('meta[property="og:image:height"]', '900')
+        setMeta('meta[property="og:image:alt"]', share.getAttribute('data-alt'))
+        setMeta('meta[property="og:type"]', 'article')
+        share.setAttribute('data-prerender-head', '')
+      }
+
       // Preload this page's main photo (largest image in the first screen, phone width) so it downloads with
       // the CSS instead of after the layout is known. Measured in a narrow viewport below.
       const hero = window.__lcpImage

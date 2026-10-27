@@ -120,7 +120,7 @@
   padding: 1px 8px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--border-strong);
-  color: var(--primary-text);
+  color: var(--text-muted);
 }
 .cardTitle {
   font-size: 1.375rem;
@@ -260,4 +260,181 @@
 .prose img {
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
+}
+
+/* ── post blocks ── */
+.cover {
+  margin-top: var(--space-6);
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.md > * + * {
+  margin-top: var(--space-4);
+}
+.md > :first-child {
+  margin-top: 0;
+}
+.prose > * + * {
+  margin-top: var(--space-5);
+}
+.prose hr {
+  border: 0;
+  height: 1px;
+  margin-block: var(--space-7);
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+}
+.prose h2 {
+  margin-top: 0;
+}
+.prose :global(mark.todo) {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: rgb(250 204 21 / 0.18);
+  color: #fde68a;
+  outline: 1px dashed rgb(250 204 21 / 0.6);
+}
+/* Reaction GIFs: a side column on wide screens, a small inline card on phones. */
+.sideGif {
+  float: right;
+  clear: right;
+  width: 200px;
+  margin: 4px 0 var(--space-4) var(--space-5);
+}
+.sideGif img {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+@media (min-width: 1240px) {
+  .sideGif {
+    margin-right: -248px;
+    margin-left: var(--space-6);
+  }
+}
+@media (max-width: 640px) {
+  .sideGif {
+    float: none;
+    width: min(240px, 70%);
+    margin: 0 auto;
+  }
+}
+.slot {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: var(--space-4);
+  text-align: center;
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--text-muted);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: rgb(124 58 237 / 0.06);
+}
+.slot svg {
+  color: var(--primary-text);
+}
+.slot a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--primary-text);
+  text-decoration: none !important;
+}
+.rec {
+  clear: both;
+}
+.rec video {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.rec figcaption {
+  margin-top: var(--space-2);
+  font-size: var(--fs-small);
+  text-align: center;
+}
+div.rec.slot {
+  padding: var(--space-6) var(--space-5);
+  font-size: var(--fs-small);
+}
+.cardCover {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+/* With a cover: image beside the text on wider screens, on top on phones. */
+@media (min-width: 760px) {
+  .card:has(.cardCover) {
+    display: grid;
+    grid-template-columns: minmax(220px, 300px) 1fr;
+    column-gap: var(--space-5);
+    row-gap: var(--space-2);
+    align-content: start;
+  }
+  .card:has(.cardCover) > :not(.cardCover) {
+    grid-column: 2;
+  }
+  .cardCover {
+    grid-column: 1;
+    grid-row: 1 / span 6;
+    align-self: start;
+  }
+}
+
+/* Language choice for the blog: large and obvious, not just the header toggle. */
+.langSwitch {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--space-5);
+  padding: 6px 6px 6px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  color: var(--text-muted);
+}
+.langSwitchLabel {
+  margin-right: 4px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+.langSwitch button {
+  min-height: 40px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.langSwitch button:hover {
+  color: var(--text);
+}
+.langSwitch button[aria-pressed='true'] {
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: var(--glow-soft);
+}
+.postHeader .langSwitch {
+  margin: 0 0 var(--space-5);
+}
+.langBadgeOn {
+  border-color: var(--primary-text) !important;
+  color: var(--primary-text) !important;
+}
+.untranslated {
+  margin-bottom: var(--space-4);
+  font-size: var(--fs-small);
+  color: var(--accent);
 }

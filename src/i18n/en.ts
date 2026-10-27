@@ -252,6 +252,8 @@ export const en = {
     minRead: 'min read', // UNAPPROVED
     noMatch: 'No articles in this category yet.', // UNAPPROVED
     notFound: 'No article at this address.', // UNAPPROVED
+    readIn: 'Read in', // UNAPPROVED
+    untranslated: 'This article is only available in French for now.', // UNAPPROVED
   },
   contact: {
     title: "Let's build something together",

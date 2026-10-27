@@ -259,6 +259,8 @@ export const fr: Dict = {
     minRead: 'min de lecture', // UNAPPROVED
     noMatch: "Pas encore d'article dans cette catégorie.", // UNAPPROVED
     notFound: 'Aucun article à cette adresse.', // UNAPPROVED
+    readIn: 'Lire en', // UNAPPROVED
+    untranslated: "Cet article n'existe qu'en anglais pour le moment.", // UNAPPROVED
   },
   contact: {
     title: 'Construisons quelque chose ensemble',
