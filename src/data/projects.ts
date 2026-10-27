@@ -98,7 +98,7 @@ export type Media = ImageMedia | VideoMedia
 
 export type ProjectLink =
   | { kind: 'demo' | 'photos' | 'screenshots'; href: `#${string}` } // in-page anchor on the detail page
-  | { kind: 'github' | 'leanCanvas' | 'live'; href: string } // 'live': a running app (opens in a new tab)
+  | { kind: 'github' | 'leanCanvas' | 'live' | 'site'; href: string } // 'live': a running app, 'site': a project website (new tab)
   | { kind: 'githubComing' }
 
 export type Project = {
@@ -247,74 +247,99 @@ export const projects: Project[] = [
         },
       },
     ],
-    // GitHub link to add once Assim publishes the repo.
     links: [{ kind: 'photos', href: '#media' }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/aivancity-hub' }],
   },
   {
-    slug: 'aquanova',
-    filter: 'hackathons',
+    slug: 'vitalight',
+    filter: 'startup',
     featured: true,
-    title: {
-      en: 'AquaNova — 3rd, back-to-school hackathon',
-      fr: 'AquaNova — 3e, hackathon de rentrée', // UNAPPROVED (FR title)
-    },
+    title: { en: 'VitaLight', fr: 'VitaLight' },
     oneLiner: {
-      en: 'AI swim coach: pose scoring and annotated video feedback',
-      fr: 'Coach de natation IA : scores de posture et vidéo annotée',
+      en: 'Health-AI startup concept, Microsoft Imagine Cup 2025 participant',
+      fr: 'Concept de startup santé-IA, participant à la Microsoft Imagine Cup 2025',
     },
     detail: {
       en: [
-        "At aivancity's September 2025 back-to-school seminar hackathon, a team of 5 mixing students from several PGE years built AquaNova, an AI swim coach. Upload a swim video: MediaPipe tracks the swimmer's pose frame by frame, the app scores body alignment, stroke efficiency and kick from 0 to 100, and returns an annotated video with colour-coded overlays plus personalised drills. We finished 3rd.",
+        'In October 2024 I founded a 4-person student team to enter Microsoft Imagine Cup 2025 with VitaLight, a preventive-health concept using AI to predict newborn health risks from parental medical history. I wrote the pitch and built the business model (Lean Canvas), brand and Azure-based architecture plan. The project stayed at concept stage while we focused on internships and studies.',
       ],
       fr: [
-        "Lors du hackathon du séminaire de rentrée d'aivancity en septembre 2025, une équipe de 5 étudiants de plusieurs promotions du PGE a créé AquaNova, un coach de natation IA. On importe une vidéo : MediaPipe suit la posture du nageur image par image, l'application note l'alignement du corps, l'efficacité de la nage et le battement de jambes sur 100, puis renvoie une vidéo annotée avec code couleur et des exercices personnalisés. Nous avons fini 3e.",
+        "En octobre 2024, j'ai fondé une équipe de 4 étudiants pour participer à la Microsoft Imagine Cup 2025 avec VitaLight, un concept de santé préventive utilisant l'IA pour prédire les risques de santé du nouveau-né à partir des antécédents des parents. J'ai rédigé le pitch et construit le modèle économique (Lean Canvas), la marque et le plan d'architecture sur Azure. Le projet est resté au stade de concept, le temps de nous consacrer à nos stages et à nos études.",
       ],
     },
-    stack: ['Python', 'Flask', 'OpenCV', 'MediaPipe', 'NumPy', 'Tailwind'],
-    // Screenshots of the hackathon app (swim_analysis.html), demo data. Alt text UNAPPROVED (not in assets.md yet).
+    stack: ['Python', 'TensorFlow', 'scikit-learn', 'Azure', 'React', 'TypeScript', 'Vite'],
+    // Screenshots of the clickable demo (Portfolio/vitalight, synthetic data); FR site shows the FR interface.
+    // Alt text UNAPPROVED.
     cover: {
       kind: 'image',
-      pic: aquaScreens,
+      pic: vitaLandingEn,
+      picFr: vitaLandingFr,
       alt: {
-        en: 'AquaNova app screens: home, AI analysis and recommended drills',
-        fr: "Écrans de l'application AquaNova : accueil, analyse IA et exercices recommandés",
+        en: 'VitaLight demo: landing page (synthetic data)',
+        fr: "Démo VitaLight : page d'accueil (données synthétiques)",
       },
     },
     media: [
       {
         kind: 'image',
-        pic: aquaHome,
+        pic: vitaDashboardEn,
+        picFr: vitaDashboardFr,
         alt: {
-          en: 'AquaNova home screen (hackathon prototype, demo data)',
-          fr: "Écran d'accueil d'AquaNova (prototype du hackathon, données de démonstration)",
+          en: 'Clinician dashboard: families followed, recent assessments and cohort by attention level (synthetic data)',
+          fr: "Tableau de bord clinicien : familles suivies, évaluations récentes et cohorte par niveau d'attention (données synthétiques)",
         },
       },
       {
         kind: 'image',
-        pic: aquaAnalysis,
+        pic: vitaReportEn,
+        picFr: vitaReportFr,
         alt: {
-          en: 'AquaNova AI analysis screen (hackathon prototype, demo data)',
-          fr: "Écran d'analyse IA d'AquaNova (prototype du hackathon, données de démonstration)",
+          en: 'Risk report for a fictional family: each condition against the population baseline, with the factors behind it',
+          fr: "Rapport de risque d'une famille fictive : chaque pathologie comparée à la référence de population, avec les facteurs en cause",
         },
       },
       {
         kind: 'image',
-        pic: aquaDrills,
+        pic: vitaNewAssessmentEn,
+        picFr: vitaNewAssessmentFr,
         alt: {
-          en: 'AquaNova recommended drills (hackathon prototype, demo data)',
-          fr: "Exercices recommandés par AquaNova (prototype du hackathon, données de démonstration)",
+          en: "New assessment: both parents' medical history entered in five steps",
+          fr: 'Nouvelle évaluation : les antécédents médicaux des deux parents saisis en cinq étapes',
         },
       },
       {
         kind: 'image',
-        pic: aquaLibrary,
+        pic: vitaParentAppEn,
+        picFr: vitaParentAppFr,
         alt: {
-          en: 'AquaNova technique library (hackathon prototype, demo data)',
-          fr: "Bibliothèque de techniques d'AquaNova (prototype du hackathon, données de démonstration)",
+          en: 'Parent mobile app: the report in plain language and weekly pregnancy guidance',
+          fr: 'Application mobile parents : le rapport en langage simple et des conseils de grossesse chaque semaine',
         },
+      },
+      {
+        kind: 'image',
+        pic: vitaGuideEn,
+        picFr: vitaGuideFr,
+        alt: {
+          en: 'Pregnancy guide with its sources, and the weekly push-notification schedule',
+          fr: 'Guide de grossesse avec ses sources, et le calendrier hebdomadaire des notifications push',
+        },
+      },
+      {
+        kind: 'image',
+        pic: vitaNotificationsEn,
+        picFr: vitaNotificationsFr,
+        alt: {
+          en: 'Clinician notification centre: alerts when a prediction is ready or a report is shared',
+          fr: "Centre de notifications du clinicien : alertes quand une prédiction est prête ou qu'un rapport est partagé",
+        },
+      },
+      {
+        kind: 'image',
+        pic: vitaCanvas,
+        alt: { en: 'VitaLight Lean Canvas', fr: 'Lean Canvas de VitaLight' },
       },
     ],
-    links: [{ kind: 'github', href: 'https://github.com/assim-ben-ahmed/AquaNova' }],
+    links: [{ kind: 'live', href: 'https://assim-ben-ahmed.github.io/vitalight/' }, { kind: 'leanCanvas', href: vitaCanvasPdf }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/vitalight' }],
   },
   {
     slug: 'la-galite-voyage',
@@ -505,98 +530,72 @@ export const projects: Project[] = [
         },
       },
     ],
-    links: [{ kind: 'github', href: 'https://github.com/assim-ben-ahmed/al-safa-2-park' }],
+    links: [{ kind: 'site', href: 'https://assim-ben-ahmed.github.io/al-safa-2-park/' }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/al-safa-2-park' }],
   },
   {
-    slug: 'vitalight',
-    filter: 'startup',
-    title: { en: 'VitaLight', fr: 'VitaLight' },
+    slug: 'aquanova',
+    filter: 'hackathons',
+    title: {
+      en: 'AquaNova — 3rd, back-to-school hackathon',
+      fr: 'AquaNova — 3e, hackathon de rentrée', // UNAPPROVED (FR title)
+    },
     oneLiner: {
-      en: 'Health-AI startup concept, Microsoft Imagine Cup 2025 participant',
-      fr: 'Concept de startup santé-IA, participant à la Microsoft Imagine Cup 2025',
+      en: 'AI swim coach: pose scoring and annotated video feedback',
+      fr: 'Coach de natation IA : scores de posture et vidéo annotée',
     },
     detail: {
       en: [
-        'In October 2024 I founded a 4-person student team to enter Microsoft Imagine Cup 2025 with VitaLight, a preventive-health concept using AI to predict newborn health risks from parental medical history. I wrote the pitch and built the business model (Lean Canvas), brand and Azure-based architecture plan. The project stayed at concept stage while we focused on internships and studies.',
+        "At aivancity's September 2025 back-to-school seminar hackathon, a team of 5 mixing students from several PGE years built AquaNova, an AI swim coach. Upload a swim video: MediaPipe tracks the swimmer's pose frame by frame, the app scores body alignment, stroke efficiency and kick from 0 to 100, and returns an annotated video with colour-coded overlays plus personalised drills. We finished 3rd.",
       ],
       fr: [
-        "En octobre 2024, j'ai fondé une équipe de 4 étudiants pour participer à la Microsoft Imagine Cup 2025 avec VitaLight, un concept de santé préventive utilisant l'IA pour prédire les risques de santé du nouveau-né à partir des antécédents des parents. J'ai rédigé le pitch et construit le modèle économique (Lean Canvas), la marque et le plan d'architecture sur Azure. Le projet est resté au stade de concept, le temps de nous consacrer à nos stages et à nos études.",
+        "Lors du hackathon du séminaire de rentrée d'aivancity en septembre 2025, une équipe de 5 étudiants de plusieurs promotions du PGE a créé AquaNova, un coach de natation IA. On importe une vidéo : MediaPipe suit la posture du nageur image par image, l'application note l'alignement du corps, l'efficacité de la nage et le battement de jambes sur 100, puis renvoie une vidéo annotée avec code couleur et des exercices personnalisés. Nous avons fini 3e.",
       ],
     },
-    stack: ['Python', 'TensorFlow', 'scikit-learn', 'Azure', 'React', 'TypeScript', 'Vite'],
-    // Screenshots of the clickable demo (Portfolio/vitalight, synthetic data); FR site shows the FR interface.
-    // Alt text UNAPPROVED.
+    stack: ['Python', 'Flask', 'OpenCV', 'MediaPipe', 'NumPy', 'Tailwind'],
+    // Screenshots of the hackathon app (swim_analysis.html), demo data. Alt text UNAPPROVED (not in assets.md yet).
     cover: {
       kind: 'image',
-      pic: vitaLandingEn,
-      picFr: vitaLandingFr,
+      pic: aquaScreens,
       alt: {
-        en: 'VitaLight demo: landing page (synthetic data)',
-        fr: "Démo VitaLight : page d'accueil (données synthétiques)",
+        en: 'AquaNova app screens: home, AI analysis and recommended drills',
+        fr: "Écrans de l'application AquaNova : accueil, analyse IA et exercices recommandés",
       },
     },
     media: [
       {
         kind: 'image',
-        pic: vitaDashboardEn,
-        picFr: vitaDashboardFr,
+        pic: aquaHome,
         alt: {
-          en: 'Clinician dashboard: families followed, recent assessments and cohort by attention level (synthetic data)',
-          fr: "Tableau de bord clinicien : familles suivies, évaluations récentes et cohorte par niveau d'attention (données synthétiques)",
+          en: 'AquaNova home screen (hackathon prototype, demo data)',
+          fr: "Écran d'accueil d'AquaNova (prototype du hackathon, données de démonstration)",
         },
       },
       {
         kind: 'image',
-        pic: vitaReportEn,
-        picFr: vitaReportFr,
+        pic: aquaAnalysis,
         alt: {
-          en: 'Risk report for a fictional family: each condition against the population baseline, with the factors behind it',
-          fr: "Rapport de risque d'une famille fictive : chaque pathologie comparée à la référence de population, avec les facteurs en cause",
+          en: 'AquaNova AI analysis screen (hackathon prototype, demo data)',
+          fr: "Écran d'analyse IA d'AquaNova (prototype du hackathon, données de démonstration)",
         },
       },
       {
         kind: 'image',
-        pic: vitaNewAssessmentEn,
-        picFr: vitaNewAssessmentFr,
+        pic: aquaDrills,
         alt: {
-          en: "New assessment: both parents' medical history entered in five steps",
-          fr: 'Nouvelle évaluation : les antécédents médicaux des deux parents saisis en cinq étapes',
+          en: 'AquaNova recommended drills (hackathon prototype, demo data)',
+          fr: "Exercices recommandés par AquaNova (prototype du hackathon, données de démonstration)",
         },
       },
       {
         kind: 'image',
-        pic: vitaParentAppEn,
-        picFr: vitaParentAppFr,
+        pic: aquaLibrary,
         alt: {
-          en: 'Parent mobile app: the report in plain language and weekly pregnancy guidance',
-          fr: 'Application mobile parents : le rapport en langage simple et des conseils de grossesse chaque semaine',
+          en: 'AquaNova technique library (hackathon prototype, demo data)',
+          fr: "Bibliothèque de techniques d'AquaNova (prototype du hackathon, données de démonstration)",
         },
-      },
-      {
-        kind: 'image',
-        pic: vitaGuideEn,
-        picFr: vitaGuideFr,
-        alt: {
-          en: 'Pregnancy guide with its sources, and the weekly push-notification schedule',
-          fr: 'Guide de grossesse avec ses sources, et le calendrier hebdomadaire des notifications push',
-        },
-      },
-      {
-        kind: 'image',
-        pic: vitaNotificationsEn,
-        picFr: vitaNotificationsFr,
-        alt: {
-          en: 'Clinician notification centre: alerts when a prediction is ready or a report is shared',
-          fr: "Centre de notifications du clinicien : alertes quand une prédiction est prête ou qu'un rapport est partagé",
-        },
-      },
-      {
-        kind: 'image',
-        pic: vitaCanvas,
-        alt: { en: 'VitaLight Lean Canvas', fr: 'Lean Canvas de VitaLight' },
       },
     ],
-    links: [{ kind: 'live', href: 'https://assim-ben-ahmed.github.io/vitalight/' }, { kind: 'leanCanvas', href: vitaCanvasPdf }, { kind: 'github', href: 'https://github.com/assim-ben-ahmed/vitalight' }],
+    links: [{ kind: 'github', href: 'https://github.com/assim-ben-ahmed/AquaNova' }],
   },
   {
     slug: 'pitchboy',

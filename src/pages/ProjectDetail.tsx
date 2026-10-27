@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { m, useReducedMotion } from 'framer-motion'
-import { ArrowLeft, ExternalLink, FileText, Images, PlayCircle, Rocket } from 'lucide-react'
+import { ArrowLeft, ExternalLink, FileText, Globe, Images, PlayCircle, Rocket } from 'lucide-react'
 import { useI18n, useL } from '../i18n'
 import { getProject, picFor, type Media, type ProjectLink } from '../data/projects'
 import { projectDetails } from '../data/projectDetails'
@@ -198,7 +198,7 @@ function LinkButton({ link }: { link: ProjectLink }) {
   }
   return (
     <a href={link.href} target="_blank" rel="noopener noreferrer" className={`${b.btn} ${b.primary}`}>
-      {link.kind === 'github' ? <GitHubIcon size={18} /> : link.kind === 'live' ? <Rocket size={18} aria-hidden="true" /> : <FileText size={18} aria-hidden="true" />}
+      {link.kind === 'github' ? <GitHubIcon size={18} /> : link.kind === 'live' ? <Rocket size={18} aria-hidden="true" /> : link.kind === 'site' ? <Globe size={18} aria-hidden="true" /> : <FileText size={18} aria-hidden="true" />}
       {label}
       <ExternalLink size={14} aria-hidden="true" />
       <span className="sr-only">{t.a11y.opensNewTab}</span>

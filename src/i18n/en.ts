@@ -74,6 +74,7 @@ export const en = {
       githubComing: 'GitHub (coming)',
       leanCanvas: 'Lean Canvas',
       live: 'Interactive demo', // UNAPPROVED
+      site: 'Project website', // UNAPPROVED
     },
   },
   projectsPage: {
@@ -241,7 +242,7 @@ export const en = {
       },
     ],
     training:
-      'Training (not certified): Microsoft Power BI (PL-300), AWS Machine Learning. Certificates: Python for Time Series Forecasting, Cybersecurity Foundations, HR Foundations (LinkedIn Learning, 2024).',
+      'In progress: Microsoft Power BI (PL-300), AWS Machine Learning. Certificates: Python for Time Series Forecasting, Cybersecurity Foundations, HR Foundations (LinkedIn Learning, 2024).',
   },
   blog: {
     title: 'Writing',
