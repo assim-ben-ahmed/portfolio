@@ -7,6 +7,11 @@ import wpLogin from '../../assets/images/projects/wellpack/01-manager-login.jpg?
 import wpDashboard from '../../assets/images/projects/wellpack/02-manager-dashboard.jpg?pic'
 import wpTool from '../../assets/images/projects/wellpack/03-manager-tool-details.jpg?pic'
 import wpPipedrive from '../../assets/images/projects/wellpack/04-pipedrive-assistant.jpg?pic'
+// 06-09: reconstruction of the Pipedrive agent interface with fictional data (_sources/originals/wellpack-pipedrive).
+import wpPdSales from '../../assets/images/projects/wellpack/06-pipedrive-employee-sales.jpg?pic'
+import wpPdDenied from '../../assets/images/projects/wellpack/07-pipedrive-employee-denied.jpg?pic'
+import wpPdConfirm from '../../assets/images/projects/wellpack/08-pipedrive-admin-confirm.jpg?pic'
+import wpPdUpdate from '../../assets/images/projects/wellpack/09-pipedrive-admin-update.jpg?pic'
 import wpDemo from '../../assets/images/projects/wellpack/05-manager-demo.mp4?url'
 import hubPitch from '../../assets/images/achievements/google-build-with-ai/01-pitching-the-portal.jpg?pic'
 import hubDemo from '../../assets/images/achievements/google-build-with-ai/02-live-demo-audience.jpg?pic'
@@ -183,6 +188,39 @@ export const projects: Project[] = [
         alt: {
           en: 'Pipedrive AI assistant answering a CRM question',
           fr: 'Assistant IA Pipedrive répondant à une question CRM',
+        },
+      },
+      // Alt text UNAPPROVED (06-09).
+      {
+        kind: 'image',
+        pic: wpPdSales,
+        alt: {
+          en: 'Employee chatbot (consulting only) listing the sales closed on a given day, fictional data',
+          fr: 'Chatbot employé (consultation uniquement) listant les ventes conclues un jour donné, données fictives',
+        },
+      },
+      {
+        kind: 'image',
+        pic: wpPdDenied,
+        alt: {
+          en: 'Employee chatbot refusing to delete a deal: consulting-only access, fictional data',
+          fr: "Chatbot employé refusant de supprimer une affaire : accès en consultation uniquement, données fictives",
+        },
+      },
+      {
+        kind: 'image',
+        pic: wpPdConfirm,
+        alt: {
+          en: 'Admin chatbot turning a plain-language request into a new deal, with a confirmation pop-up before the action, fictional data',
+          fr: "Chatbot administrateur transformant une demande en langage courant en nouvelle affaire, avec une confirmation avant l'action, données fictives",
+        },
+      },
+      {
+        kind: 'image',
+        pic: wpPdUpdate,
+        alt: {
+          en: "Admin chatbot updating a deal's amount after confirmation, fictional data",
+          fr: "Chatbot administrateur modifiant le montant d'une affaire après confirmation, données fictives",
         },
       },
     ],

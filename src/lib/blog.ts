@@ -31,6 +31,7 @@ export const BLOG_CATEGORIES: BlogCategory[] = ['papers', 'projects', 'notes']
  *   [ANIM: <id>]                              animated explainer (src/components/blog/Anims.tsx)
  *   [SIDE: <id>]                              small animated visual in the side column (same file)
  *   [REC: description] / [REC: <slug/file.mp4> | caption]   screen recording slot / the recording
+ *   [FIG: <slug/file.jpg> | alt | caption]   full-width screenshot or image
  * `{{TEXT}}` anywhere in the Markdown shows as a highlighted to-do.
  */
 export type Block =
@@ -39,6 +40,7 @@ export type Block =
   | { type: 'anim'; id: string }
   | { type: 'side'; id: string }
   | { type: 'rec'; src?: string; text: string }
+  | { type: 'fig'; src?: string; alt: string; caption: string }
 
 export type Lang = 'en' | 'fr'
 
@@ -74,7 +76,7 @@ function parseFrontMatter(raw: string): { data: Record<string, string | string[]
   return { data, body: m[2] }
 }
 
-const MARKER = /^\[(SIDE-GIF|SIDE|ANIM|REC):\s*([\s\S]*)\]\s*$/
+const MARKER = /^\[(SIDE-GIF|SIDE|ANIM|REC|FIG):\s*([\s\S]*)\]\s*$/
 const isMedia = (s: string) => /^https?:\/\//.test(s) || /\.(gif|jpe?g|png|webp|mp4|webm)$/i.test(s)
 
 function toBlocks(body: string): Block[] {
@@ -99,6 +101,7 @@ function toBlocks(body: string): Block[] {
     const parts = m[2].split('|').map((p) => p.trim().replace(/^"|"$/g, ''))
     if (m[1] === 'ANIM') blocks.push({ type: 'anim', id: parts[0].split(/\s/)[0] })
     else if (m[1] === 'SIDE') blocks.push({ type: 'side', id: parts[0].split(/\s/)[0] })
+    else if (m[1] === 'FIG') blocks.push({ type: 'fig', src: mediaUrl(parts[0]), alt: parts[1] ?? '', caption: parts[2] ?? '' })
     else if (m[1] === 'REC') {
       blocks.push(isMedia(parts[0]) ? { type: 'rec', src: mediaUrl(parts[0]), text: parts[1] ?? '' } : { type: 'rec', text: m[2].trim() })
     } else if (isMedia(parts[0])) blocks.push({ type: 'gif', src: mediaUrl(parts[0]), alt: parts[1] ?? '', mood: '', query: '' })
@@ -113,7 +116,7 @@ const versions: Post[] = Object.entries(files)
     const { data, body } = parseFrontMatter(raw)
     const file = path.split('/').pop()!.replace(/\.md$/, '')
     const suffix = file.match(/\.(en|fr)$/)?.[1] as Lang | undefined
-    const prose = body.replace(/<!--[\s\S]*?-->/g, '').replace(/^\[(SIDE-GIF|SIDE|ANIM|REC):.*\]\s*$/gm, '')
+    const prose = body.replace(/<!--[\s\S]*?-->/g, '').replace(/^\[(SIDE-GIF|SIDE|ANIM|REC|FIG):.*\]\s*$/gm, '')
     const words = prose.split(/\s+/).filter(Boolean).length
     const cover = data.cover ? mediaUrl(String(data.cover)) : undefined
     return {

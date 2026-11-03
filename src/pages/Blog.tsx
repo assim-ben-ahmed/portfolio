@@ -184,6 +184,14 @@ export function BlogPost() {
 function PostBlock({ block }: { block: Block }) {
   if (block.type === 'md') return <div className={s.md} dangerouslySetInnerHTML={{ __html: block.html }} />
   if (block.type === 'anim') return <BlogAnim id={block.id} />
+  if (block.type === 'fig') {
+    return (
+      <figure className={s.fig}>
+        {block.src ? <img src={block.src} alt={block.alt} width={1600} height={1000} loading="lazy" /> : <p className={s.slot}>Missing image</p>}
+        {block.caption && <figcaption>{block.caption}</figcaption>}
+      </figure>
+    )
+  }
   if (block.type === 'side') {
     return (
       <aside className={s.sideGif}>

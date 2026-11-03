@@ -44,6 +44,22 @@ const TEXT = {
     itsMe: 'oh. It’s me.',
     visitors: 'visitors',
     counted: 'Hi. You’ve been counted (only if you said yes).',
+    // VitaLight post
+    riskLabel: 'Bar chart: the asthma risk of a newborn with no family history is 6.5%. Multiplied by 2.2 because the mother has asthma, it becomes 14.2%; multiplied by 1.8 because the father has asthma, it becomes 25.9%. The population average is 9.1%.',
+    riskCaption: 'Asthma, from the trained model: start from the risk with no family history, then multiply by each factor. Every step is shown in the report.',
+    riskSteps: ['No family history', 'Mother has asthma', 'Father has asthma', 'Population average'],
+    aucLabel: 'Chart of AUC on 400,000 held-out synthetic families. Asthma: rules 0.601, model 0.602, oracle 0.653. Eczema: 0.579, 0.579, 0.647. Type 1 diabetes: 0.568, 0.575, 0.575. Heart defect: 0.559, 0.566, 0.566.',
+    aucCaption: 'AUC on 400,000 held-out families (0.5 is a coin flip). The oracle knows the true simulated risk: no model can beat it.',
+    conditions: ['Asthma', 'Eczema', 'Type 1 diabetes', 'Heart defect'],
+    methods: ['Hand-written rules', 'Trained model', 'Oracle'],
+    coinFlip: 'coin flip',
+    folder: 'Last modified: October 2024',
+    reopened: 'Reopened: October 2026',
+    dustyCap: 'Two years in a folder.',
+    punnettCap: 'Two carrier parents: 1 in 4, every time. Biology already knows this, so the model doesn’t learn it.',
+    browser: 'Browser',
+    server: 'Server',
+    parityCap: 'Same 11 test families, same answers. The tests fail if the two ever drift apart.',
   },
   fr: {
     flowLabel: 'Animation : un visiteur clique sur une page, un événement part du navigateur vers Google Analytics, et un tableau de bord se met à jour.',
@@ -85,6 +101,22 @@ const TEXT = {
     itsMe: 'ah. C’est moi.',
     visitors: 'visiteurs',
     counted: 'Salut. Vous venez d’être compté (seulement si vous avez dit oui).',
+    // VitaLight post
+    riskLabel: 'Graphique : le risque d’asthme d’un nouveau-né sans antécédents familiaux est de 6,5 %. Multiplié par 2,2 parce que la mère est asthmatique, il passe à 14,2 % ; multiplié par 1,8 parce que le père l’est aussi, il atteint 25,9 %. La moyenne de la population est de 9,1 %.',
+    riskCaption: 'L’asthme, avec le modèle entraîné : on part du risque sans antécédents, puis on multiplie par chaque facteur. Chaque étape est affichée dans le rapport.',
+    riskSteps: ['Sans antécédents', 'Mère asthmatique', 'Père asthmatique', 'Moyenne de la population'],
+    aucLabel: 'Graphique des AUC sur 400 000 familles synthétiques de test. Asthme : règles 0,601, modèle 0,602, oracle 0,653. Eczéma : 0,579, 0,579, 0,647. Diabète de type 1 : 0,568, 0,575, 0,575. Cardiopathie : 0,559, 0,566, 0,566.',
+    aucCaption: 'AUC sur 400 000 familles de test (0,5 = pile ou face). L’oracle connaît le vrai risque simulé : aucun modèle ne peut faire mieux.',
+    conditions: ['Asthme', 'Eczéma', 'Diabète de type 1', 'Cardiopathie congénitale'],
+    methods: ['Règles écrites à la main', 'Modèle entraîné', 'Oracle'],
+    coinFlip: 'pile ou face',
+    folder: 'Dernière modification : octobre 2024',
+    reopened: 'Rouvert : octobre 2026',
+    dustyCap: 'Deux ans dans un dossier.',
+    punnettCap: 'Deux parents porteurs : 1 sur 4, à chaque fois. La biologie le sait déjà, donc le modèle ne l’apprend pas.',
+    browser: 'Navigateur',
+    server: 'Serveur',
+    parityCap: 'Les mêmes 11 familles de test, les mêmes réponses. Les tests échouent si les deux divergent.',
   },
 }
 
@@ -415,6 +447,95 @@ function Realtime() {
   )
 }
 
+// ── VitaLight: how one risk is built ────────────────────────────────────────
+
+// Learned values from vitalight/api/models/vitalight-model.json (vl-2026.10.18-poisson): exp(intercept) = 6.5%,
+// relative risks 2.196 (mother) and 1.824 (father); 9.1% is the observed rate in the test cohort.
+const RISK = [{ pct: 6.5 }, { pct: 14.2, rr: 2.2 }, { pct: 25.9, rr: 1.8 }, { pct: 9.1, ref: true }]
+
+function RiskMath() {
+  const t = useT()
+  const { lang } = useI18n()
+  const fmt = (v: number) => v.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-GB', { minimumFractionDigits: 1 })
+  return (
+    <Frame label={t.riskLabel} caption={t.riskCaption}>
+      <div className={`${s.bars} ${s.risk}`}>
+        {RISK.map((r, i) => (
+          <div key={i} className={`${s.barRow} ${r.ref ? s.riskRef : ''}`}>
+            <span className={s.barName}>
+              {r.rr && (
+                <b className={s.rr} style={{ '--i': i } as CSSProperties}>
+                  ×{fmt(r.rr)}
+                </b>
+              )}
+              {t.riskSteps[i]}
+            </span>
+            <span className={s.barTrack}>
+              <span className={s.barFill} style={{ '--w': `${(r.pct / 30) * 100}%`, '--i': i } as CSSProperties} />
+            </span>
+            <span className={s.barValue} style={{ '--i': i } as CSSProperties}>
+              {fmt(r.pct)}
+              {lang === 'fr' ? ' %' : '%'}
+            </span>
+          </div>
+        ))}
+      </div>
+    </Frame>
+  )
+}
+
+// ── VitaLight: honest scores ────────────────────────────────────────────────
+
+// Held-out AUC per condition: hand-written rules, trained model, oracle (vitalight README / model card).
+const AUC = [
+  [0.601, 0.602, 0.653],
+  [0.579, 0.579, 0.647],
+  [0.568, 0.575, 0.575],
+  [0.559, 0.566, 0.566],
+]
+
+function ModelScores() {
+  const t = useT()
+  const { lang } = useI18n()
+  const fmt = (v: number) => v.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-GB', { minimumFractionDigits: 1 })
+  return (
+    <Frame label={t.aucLabel} caption={t.aucCaption}>
+      <ul className={s.aucLegend} aria-hidden="true">
+        {t.methods.map((m, k) => (
+          <li key={m} data-k={k}>
+            {m}
+          </li>
+        ))}
+      </ul>
+      <div className={s.auc}>
+        {AUC.map((row, i) => (
+          <div key={i} className={s.aucGroup}>
+            <span className={s.aucName}>{t.conditions[i]}</span>
+            <div className={s.aucBars}>
+              {row.map((v, k) => (
+                <div key={k} className={s.aucRow} data-k={k}>
+                  <span className={s.barTrack}>
+                    <span className={s.barFill} style={{ '--w': `${((v - 0.5) / 0.2) * 100}%`, '--i': i + k * 0.3 } as CSSProperties} />
+                  </span>
+                  <span className={s.barValue} style={{ '--i': i + k * 0.3 } as CSSProperties}>
+                    {fmt(v)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+        <p className={s.aucAxis} aria-hidden="true">
+          <span>
+            {fmt(0.5)} · {t.coinFlip}
+          </span>
+          <span>{fmt(0.7)}</span>
+        </p>
+      </div>
+    </Frame>
+  )
+}
+
 // ── Side visuals (small, decorative, next to the text): [SIDE: id] ─────────
 
 function useSide() {
@@ -533,12 +654,89 @@ function Wave() {
   )
 }
 
+function Dusty() {
+  const t = useT()
+  const ref = useSide()
+  return (
+    <div ref={ref} className={s.side} aria-hidden="true">
+      <svg viewBox="0 0 200 120" className={s.svg}>
+        <path d="M40 30h40l10 12h70v58H40z" className={s.folder} />
+        <text x="100" y="80" className={s.folderName}>
+          VitaLight/
+        </text>
+        {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+          <circle key={i} cx={52 + i * 18} cy={24 + (i % 3) * 6} r={1.6 + (i % 2)} className={s.dust} style={{ '--i': i } as CSSProperties} />
+        ))}
+      </svg>
+      <p className={s.dustyOld}>{t.folder}</p>
+      <p className={s.dustyNew}>{t.reopened}</p>
+      <p className={s.sideCap}>{t.dustyCap}</p>
+    </div>
+  )
+}
+
+function Punnett() {
+  const t = useT()
+  const ref = useSide()
+  const cell = (v: string, i: number) => (
+    <span key={v} className={`${s.pCell} ${v === 'aa' ? s.pHit : ''}`} style={{ '--i': i } as CSSProperties}>
+      {v}
+    </span>
+  )
+  return (
+    <div ref={ref} className={s.side} aria-hidden="true">
+      <div className={s.punnett}>
+        <span />
+        <span className={s.pHead}>A</span>
+        <span className={s.pHead}>a</span>
+        <span className={s.pHead}>A</span>
+        {cell('AA', 0)}
+        {cell('Aa', 1)}
+        <span className={s.pHead}>a</span>
+        {cell('aA', 2)}
+        {cell('aa', 3)}
+      </div>
+      <p className={s.sideBig}>1 / 4</p>
+      <p className={s.sideCap}>{t.punnettCap}</p>
+    </div>
+  )
+}
+
+function Parity() {
+  const t = useT()
+  const { lang } = useI18n()
+  const ref = useSide()
+  const v = lang === 'fr' ? '25,9 %' : '25.9%'
+  return (
+    <div ref={ref} className={s.side} aria-hidden="true">
+      <div className={s.parity}>
+        <div className={s.engine}>
+          <span className={s.engineName}>{t.browser}</span>
+          <span className={s.engineLang}>TypeScript</span>
+          <b>{v}</b>
+        </div>
+        <span className={s.equals}>=</span>
+        <div className={s.engine}>
+          <span className={s.engineName}>{t.server}</span>
+          <span className={s.engineLang}>Python</span>
+          <b>{v}</b>
+        </div>
+      </div>
+      <p className={s.check}>✓ 38 tests</p>
+      <p className={s.sideCap}>{t.parityCap}</p>
+    </div>
+  )
+}
+
 const SIDES: Record<string, () => ReactNode> = {
   bottle: Bottle,
   consent: Consent,
   phones: Phones,
   'it-was-me': ItWasMe,
   wave: Wave,
+  dusty: Dusty,
+  punnett: Punnett,
+  parity: Parity,
 }
 
 export function SideAnim({ id }: { id: string }) {
@@ -553,6 +751,8 @@ const ANIMS: Record<string, () => ReactNode> = {
   'project-race': ProjectRace,
   'bug-hunt': BugHunt,
   'before-after': BeforeAfter,
+  'risk-math': RiskMath,
+  'model-scores': ModelScores,
 }
 
 export function BlogAnim({ id }: { id: string }) {
